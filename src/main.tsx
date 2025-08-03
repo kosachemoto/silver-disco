@@ -1,10 +1,11 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Root } from '../src/pages/root/ui';
-import { Login } from '../src/pages/login/ui';
-import { LoginEmail } from '../src/pages/login-email/ui';
-import { LoginPassword } from '../src/pages/login-password/ui';
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
+
+import { LoginEmail } from '@/pages/login-email/ui';
+import { LoginPassword } from '@/pages/login-password/ui';
+import { Login } from '@/pages/login/ui';
+import { Root } from '@/pages/root/ui';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
