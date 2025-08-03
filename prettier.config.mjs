@@ -7,6 +7,19 @@
 const config = {
   trailingComma: 'es5',
   singleQuote: true,
+    plugins: ['@trivago/prettier-plugin-sort-imports'],
+  importOrder: [
+    '<THIRD_PARTY_MODULES>',
+    '^@/pages/(.*)$',
+    '^@/widgets/(.*)$',
+    '^@/features/(.*)$',
+    '^@/shared/(.*)$',
+    '^@/entities/(.*)$',
+    '^@/assets/(.*)$',
+    '^[./]',
+  ],
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
 };
 
 export default config;
