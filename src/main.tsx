@@ -7,6 +7,8 @@ import { LoginPassword } from '@/pages/login-password/ui';
 import { Login } from '@/pages/login/ui';
 import { Root } from '@/pages/root/ui';
 
+import './global.css';
+
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <BrowserRouter>
