@@ -4,8 +4,9 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 
 import { LoginEmail } from '@/pages/login-email/ui';
 import { LoginPassword } from '@/pages/login-password/ui';
-import { Login } from '@/pages/login/ui';
-import { Root } from '@/pages/root/ui';
+
+import { LoginLayout } from '@/widgets/login/ui/login-layout';
+import { RootLayout } from '@/widgets/root/ui/root-layout';
 
 import './global.css';
 
@@ -13,8 +14,9 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <BrowserRouter>
             <Routes>
-                <Route element={<Root />}>
-                    <Route path="login" element={<Login />}>
+                <Route element={<RootLayout />}>
+                    <Route index element={<Navigate to="login" replace />} />
+                    <Route path="login" element={<LoginLayout />}>
                         <Route
                             index
                             element={<Navigate to="email" replace />}
