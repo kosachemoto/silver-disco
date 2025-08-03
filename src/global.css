@@ -1,19 +1,19 @@
 @font-face {
-    font-family: 'Martian Grotesk', sans-serif;
+    font-family: 'Martian Grotesk';
     font-weight: 400;
     font-style: normal;
     font-display: fallback;
-    src: url('../public/fonts/Martian\ Grotesk/StdRg.woff2');
+    src: url('/fonts/Martian\ Grotesk/StdRg.woff2') format('woff2');
 }
 
 @font-face {
-    font-family: 'Martian Grotesk', sans-serif;
+    font-family: 'Martian Grotesk';
     font-weight: 500;
     font-style: normal;
     font-display: fallback;
-    src: url('../public/fonts/Martian\ Grotesk/StdMd.woff2');
+    src: url('/fonts/Martian\ Grotesk/StdMd.woff2') format('woff2');
 }
 
 html {
-    font-family: 'Martian Grotesk';
+    font-family: 'Martian Grotesk', sans-serif;
 }
