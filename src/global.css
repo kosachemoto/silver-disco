@@ -1,3 +1,11 @@
+:root {
+    --color-text-primary: #1C1C1C;
+
+    --color-border-primary: #757575;
+    --color-border-primary-hover: #57564F;
+    --color-border-primary-focus: #BF40BF;
+}
+
 @font-face {
     font-family: 'Martian Grotesk';
     font-weight: 400;
