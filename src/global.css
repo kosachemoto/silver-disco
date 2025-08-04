@@ -25,6 +25,9 @@
     --color-border-primary: #757575;
     --color-border-primary-hover: #57564F;
     --color-border-primary-focus: #BF40BF;
+
+    --color-link-primary: #57564F;
+    --color-link-shade-primary: #F3F2F0;
 }
 
 @font-face {

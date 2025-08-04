@@ -1,0 +1,21 @@
+.root {
+    display: inline-block;
+
+    padding-inline: 4px;
+    border-radius: 4px;
+
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--color-link-primary);
+    text-decoration: unset;
+}
+
+.root:hover {
+    background-color: var(--color-link-shade-primary);
+}
+
+.root:focus-visible {
+    background-color: var(--color-link-shade-primary);
+    outline: 2px solid var(--color-border-primary-focus);
+    outline-offset: 2px;
+}
