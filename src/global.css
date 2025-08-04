@@ -1,5 +1,6 @@
 :root {
     --color-text-primary: #1C1C1C;
+    --color-text-primary-error: crimson;
 
     --color-border-primary: #757575;
     --color-border-primary-hover: #57564F;
