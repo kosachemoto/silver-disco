@@ -1,0 +1,51 @@
+.root {
+    cursor: pointer;
+
+    width: 100%;
+    margin: unset;
+    padding-block: 12px;
+    padding-inline: 16px;
+    border: 2px solid var(--color-shape-primary);
+    border-radius: 4px;
+
+    font-family: 'Martian Grotesk';
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    color: var(--color-text-secondary);
+
+    appearance: none;
+    background-color: var(--color-background-primary);
+}
+
+.root:hover {
+    border-color: var(--color-shape-primary-hover);
+    background-color: var(--color-background-primary-hover);
+}
+
+.root:active {
+    border-color: var(--color-shape-primary-active);
+    background-color: var(--color-background-primary-active);
+}
+
+.root:focus-visible {
+    border-color: var(--color-shape-primary-focus);
+    outline: 2px solid var(--color-shape-primary-focus);
+    outline-offset: 2px;
+}
+
+.root_secondary {
+    border-color: var(--color-shape-secondary);
+    color: var(--color-text-primary);
+    background-color: var(--color-background-secondary);
+}
+
+.root_secondary:hover {
+    border-color: var(--color-shape-secondary-hover);
+    background-color: var(--color-background-secondary-hover);
+}
+
+.root_secondary:active {
+    border-color: var(--color-shape-secondary-active);
+    background-color: var(--color-background-secondary-active);
+}

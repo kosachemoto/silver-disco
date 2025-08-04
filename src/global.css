@@ -2,6 +2,26 @@
     --color-text-primary: #1C1C1C;
     --color-text-primary-error: crimson;
 
+    --color-text-secondary: #F0F0F0;
+
+    --color-background-primary: #0E0D13;
+    --color-background-primary-hover: #232228;
+    --color-background-primary-active: #424244;
+
+    --color-background-secondary: #F0F0F0;
+    --color-background-secondary-hover: #E6E6E6;
+    --color-background-secondary-active: #D8D8D8;
+
+    --color-shape-primary: #17171A;
+    --color-shape-primary-hover: #484652;
+    --color-shape-primary-active: #626265;
+    --color-shape-primary-focus: #BF40BF;
+
+    --color-shape-secondary: #C2C2C2;
+    --color-shape-secondary-hover: #B9B9B9;
+    --color-shape-secondary-active: #ACACAC;
+    --color-shape-secondary-focus: #BF40BF;
+
     --color-border-primary: #757575;
     --color-border-primary-hover: #57564F;
     --color-border-primary-focus: #BF40BF;
