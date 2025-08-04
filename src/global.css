@@ -28,6 +28,9 @@
 
     --color-link-primary: #57564F;
     --color-link-shade-primary: #F3F2F0;
+
+    --color-divider-primary: #979797;
+    --color-divider-line-primary: #C2C2C2;
 }
 
 @font-face {

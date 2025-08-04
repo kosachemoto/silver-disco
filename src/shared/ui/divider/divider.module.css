@@ -1,0 +1,19 @@
+.root {
+    display: flex;
+    align-items: center;
+}
+
+.label {
+    padding-inline: 0.5em;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--color-divider-primary);
+}
+
+.root::before,
+.root::after {
+    content: '';
+    display: block;
+    flex-grow: 1;
+    border-top: 2px solid  var(--color-divider-line-primary);
+}
