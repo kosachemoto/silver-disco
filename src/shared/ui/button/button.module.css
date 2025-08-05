@@ -1,6 +1,11 @@
 .root {
     cursor: pointer;
 
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+
     width: 100%;
     margin: unset;
     padding-block: 12px;
@@ -48,4 +53,14 @@
 .root_secondary:active {
     border-color: var(--color-shape-secondary-active);
     background-color: var(--color-background-secondary-active);
+}
+
+.loader {
+    width: 24px;
+    height: 24px;
+    fill: var(--color-text-secondary);
+}
+
+.root_secondary .loader {
+    fill: var(--color-text-primary);
 }
