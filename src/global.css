@@ -31,6 +31,10 @@
 
     --color-divider-primary: #979797;
     --color-divider-line-primary: #C2C2C2;
+
+    --color-alert-error: #ff7096;
+    --color-alert-background-error: #fae0e4;
+    --color-alert-border-error: #FDF5F6;
 }
 
 @font-face {
