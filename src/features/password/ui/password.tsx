@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 
 import { Field } from '@/shared/ui/field';
@@ -23,6 +24,7 @@ export const Password: React.FC<TProps> = ({ title, error, ...props }) => {
                         ref={refInput}
                         type={reveal ? 'text' : 'password'}
                         {...props}
+                        className={clsx(styles.password, props.className)}
                     />
                     <Input
                         type="checkbox"
