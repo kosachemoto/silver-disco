@@ -18,7 +18,15 @@ export default defineConfig({
         const block = path.basename(filename, '.module.css');
         const hash = createHash('sha256').update(filename).digest('hex').slice(0, 5);
 
-        return element === 'root' ? `${block}--${hash}` : `${block}__${element}--${hash}`;
+        if (element.startsWith('root_')) {
+          return `${block}${element.substring(4)}--${hash}`;
+        }
+
+        if (element !== 'root') {
+          return `${block}__${element}--${hash}`;
+        }
+
+        return `${block}--${hash}`;
       }
     }
   }
