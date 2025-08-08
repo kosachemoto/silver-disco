@@ -14,10 +14,13 @@ export const AuthCodeRequest: React.FC = () => {
     const { email } = useAuthCodeRouteState();
     const authCodeRequestMutation = useAuthCodeRequestMutation();
     const authCodeRequest = (data: TAuthCodeRequest) => {
-        authCodeRequestMutation.mutateAsync(data).then(() => {
-            navigate('/auth/code-verify', {
-                state: { email: authCodeRequestMutation.variables?.email },
-            });
+        authCodeRequestMutation.mutate(data, {
+            onSuccess: () => {
+                navigate('/auth/code-verify', {
+                    state: { email: data.email },
+                });
+            },
+            onError: setError,
         });
     };
 
