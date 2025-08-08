@@ -35,6 +35,14 @@
     --color-alert-error: #ff7096;
     --color-alert-background-error: #fae0e4;
     --color-alert-border-error: #FDF5F6;
+
+    --color-alert-warn: #dbb42c;
+    --color-alert-background-warn: #fff6cc;
+    --color-alert-border-warn: #fffae5;
+
+    --color-alert-success: #7ea122;
+    --color-alert-background-success: #E0F2B1;
+    --color-alert-border-success: #E8F5C3;
 }
 
 @font-face {

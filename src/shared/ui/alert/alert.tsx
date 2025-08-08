@@ -3,11 +3,28 @@ import React from 'react';
 
 import styles from './alert.module.css';
 
-export const Alert: React.FC<
-    React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>
-> = ({ children, ...props }) => {
+type TProps = {
+    variant?: 'error' | 'warn' | 'success';
+} & React.HTMLAttributes<HTMLDivElement>;
+
+export const Alert: React.FC<React.PropsWithChildren<TProps>> = ({
+    children,
+    variant = 'error',
+    ...props
+}) => {
     return (
-        <div {...props} className={clsx(styles.root, props.className)}>
+        <div
+            {...props}
+            className={clsx(
+                styles.root,
+                {
+                    [styles.root_error]: variant === 'error',
+                    [styles.root_warn]: variant === 'warn',
+                    [styles.root_success]: variant === 'success',
+                },
+                props.className
+            )}
+        >
             {children}
         </div>
     );

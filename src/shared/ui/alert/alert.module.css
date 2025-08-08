@@ -1,12 +1,28 @@
 .root {
+    margin-block-end: 32px;
     padding-block: 12px;
     padding-inline: 16px;
-    border: 2px solid var(--color-alert-border-error);
+    border: 2px solid transparent;
     border-radius: 8px;
 
     font-size: 14px;
     line-height: 24px;
-    color: var(--color-alert-error);
+}
 
+.root_error {
+    border-color: var(--color-alert-border-error);
+    color: var(--color-alert-error);
     background-color: var(--color-alert-background-error);
+}
+
+.root_warn {
+    border-color: var(--color-alert-border-warn);
+    color: var(--color-alert-warn);
+    background-color: var(--color-alert-background-warn);
+}
+
+.root_success {
+    border-color: var(--color-alert-border-success);
+    color: var(--color-alert-success);
+    background-color: var(--color-alert-background-success);
 }
