@@ -1,1 +1,1 @@
-export type { TError } from './error';
+export type { TApiErrorRaw } from './api-error-raw';

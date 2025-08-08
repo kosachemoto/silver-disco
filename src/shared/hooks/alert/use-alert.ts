@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { TError } from '@/shared/api/types';
+import type { ApiError } from '@/shared/api/utils';
 import { Alert } from '@/shared/ui/alert';
 
 type TProps = React.ComponentProps<typeof Alert>;
@@ -11,7 +11,7 @@ export const useAlert = (defaultProps?: TProps) => {
         ...defaultProps,
     });
 
-    const setError = React.useCallback(({ message }: TError) => {
+    const setError = React.useCallback(({ message }: ApiError) => {
         setProps((props) => ({ ...props, children: message }));
     }, []);
 
