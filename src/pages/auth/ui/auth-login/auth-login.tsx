@@ -11,14 +11,14 @@ import { Alert } from '@/shared/ui/alert';
 import type { TAuthLogin } from '@/entities/auth/types';
 
 export const AuthLogin: React.FC = () => {
-    const { props, setError } = useAlert();
+    const { props, setApiError } = useAlert();
     const navigate = useNavigate();
     const authLoginMutation = useAuthLoginMutation();
 
     const authLogin = (data: TAuthLogin) => {
         authLoginMutation.mutate(data, {
             onSuccess: () => navigate('/auth/success'),
-            onError: setError,
+            onError: setApiError,
         });
     };
 

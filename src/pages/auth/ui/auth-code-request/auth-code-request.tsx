@@ -12,7 +12,7 @@ import { Alert } from '@/shared/ui/alert';
 import type { TAuthCodeRequest } from '@/entities/auth/types';
 
 export const AuthCodeRequest: React.FC = () => {
-    const { props, setError } = useAlert();
+    const { props, setApiError } = useAlert();
     const navigate = useNavigate();
     const { email } = useAuthCodeRouteState();
     const authCodeRequestMutation = useAuthCodeRequestMutation();
@@ -23,7 +23,7 @@ export const AuthCodeRequest: React.FC = () => {
                     state: { email: data.email },
                 });
             },
-            onError: setError,
+            onError: setApiError,
         });
     };
 

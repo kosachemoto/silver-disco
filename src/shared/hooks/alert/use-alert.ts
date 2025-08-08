@@ -11,13 +11,13 @@ export const useAlert = (defaultProps?: TProps) => {
         ...defaultProps,
     });
 
-    const setError = React.useCallback(({ message }: ApiError) => {
+    const setApiError = React.useCallback(({ message }: ApiError) => {
         setProps((props) => ({ ...props, children: message }));
     }, []);
 
     return {
         props,
         setProps,
-        setError,
+        setApiError,
     };
 };

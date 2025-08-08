@@ -18,7 +18,7 @@ import type { TAuthCodeVerify } from '@/entities/auth/types';
 
 export const AuthCodeVerify: React.FC = () => {
     const navigate = useNavigate();
-    const { props, setError } = useAlert();
+    const { props, setApiError } = useAlert();
     const data = useAuthCodeRouteState();
     const { email } = data;
     const mutationVerify = useAuthCodeVerifyMutation();
@@ -41,7 +41,7 @@ export const AuthCodeVerify: React.FC = () => {
             onSuccess: () => {
                 navigate('/auth/success');
             },
-            onError: setError,
+            onError: setApiError,
         });
     };
 
