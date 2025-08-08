@@ -9,6 +9,30 @@ import { response200Creating } from './response200-creating';
 import { response500Creating } from './response500-creating';
 
 export const fetchMockConfig: TFetchMockConfig = {
+    '/api/auth/login': async (init) => {
+        try {
+            const body = await bodyParsing(init);
+            const email = get(body, 'email');
+
+            if (email.startsWith('invalid')) {
+                return new Response(
+                    JSON.stringify({
+                        error: {
+                            id: 'auth.login.invalid',
+                            message: 'Wrong email & password combination',
+                        },
+                    }),
+                    { status: 401 }
+                );
+            }
+
+            if (email.startsWith('500')) {
+                return response500Creating();
+            }
+        } catch (err) {}
+
+        return response200Creating();
+    },
     '/api/auth/code/request': async (init) => {
         try {
             const body = await bodyParsing(init);
