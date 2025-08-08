@@ -6,10 +6,9 @@ import { errorHandling } from '@/shared/api/utils';
 
 import type { TAuthCodeRequest } from '@/entities/auth/types';
 
-export const useAuthCodeRequestMutation = () => {
-    return useMutation<unknown, TError, TAuthCodeRequest>({
+export const useAuthCodeRequestMutation = () =>
+    useMutation<unknown, TError, TAuthCodeRequest>({
         retry: false,
         mutationFn: (variables) =>
             authCodeRequestFetch(variables).then(errorHandling),
     });
-};
