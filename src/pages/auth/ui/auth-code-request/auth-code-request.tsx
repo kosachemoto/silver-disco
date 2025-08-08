@@ -6,10 +6,13 @@ import { useAuthCodeRouteState } from '@/pages/auth/hooks';
 import { AuthCodeRequestForm } from '@/widgets/auth/ui/auth-code-request-form';
 
 import { useAuthCodeRequestMutation } from '@/shared/api/auth/code/request/hooks';
+import { useAlert } from '@/shared/hooks/alert';
+import { Alert } from '@/shared/ui/alert';
 
 import type { TAuthCodeRequest } from '@/entities/auth/types';
 
 export const AuthCodeRequest: React.FC = () => {
+    const { props, setError } = useAlert();
     const navigate = useNavigate();
     const { email } = useAuthCodeRouteState();
     const authCodeRequestMutation = useAuthCodeRequestMutation();
@@ -27,6 +30,7 @@ export const AuthCodeRequest: React.FC = () => {
     return (
         <>
             <h1>Login</h1>
+            {authCodeRequestMutation.isError && <Alert {...props} />}
             <AuthCodeRequestForm
                 onSubmit={authCodeRequest}
                 defaultValues={{ email }}
