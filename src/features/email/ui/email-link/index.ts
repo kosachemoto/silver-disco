@@ -1,2 +1,1 @@
-export { Email } from './email';
 export { EmailLink } from './email-link';
