@@ -63,4 +63,29 @@
 
 html {
     font-family: 'Martian Grotesk', sans-serif;
+    color: var(--color-text-primary);
+}
+
+body {
+    margin: unset;
+}
+
+h1 {
+    margin-block: 16px 32px;
+    text-align: start;
+}
+
+p {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: start;text-align: start;
+}
+
+a,
+input,
+button {
+    border: 2px solid transparent;
+    border-radius: 4px;
+    outline: none;
+    transition: 0.1s ease-in-out;
 }
