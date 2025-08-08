@@ -12,7 +12,7 @@ type TProps = {
 
 export const Field: React.FC<TProps> = ({ title, input, error }) => {
     return (
-        <div>
+        <div className={styles.root}>
             <label className={styles.label}>
                 <span className={styles.title}>{toReactNode(title)}</span>
                 {toReactNode(input)}

@@ -9,7 +9,6 @@ import { Password } from '@/features/password/ui';
 
 import { Button } from '@/shared/ui/button';
 import { Checkbox } from '@/shared/ui/checkbox';
-import { Form } from '@/shared/ui/form';
 
 import type { TAuthLogin } from '@/entities/auth/types';
 import { authLoginSchema } from '@/entities/auth/utils';
@@ -30,7 +29,7 @@ export const AuthLoginForm: React.FC<TProps> = ({
     });
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
+        <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
             <Email
                 {...register('email')}
                 title="Email"
@@ -47,6 +46,6 @@ export const AuthLoginForm: React.FC<TProps> = ({
             <Button type="submit" isLoading={isLoading}>
                 Sign In
             </Button>
-        </Form>
+        </form>
     );
 };

@@ -6,7 +6,6 @@ import type { SubmitHandler } from 'react-hook-form';
 
 import { Button } from '@/shared/ui/button';
 import { Field } from '@/shared/ui/field';
-import { Form } from '@/shared/ui/form';
 import { Input } from '@/shared/ui/input';
 
 import type { TAuthCodeVerify } from '@/entities/auth/types';
@@ -28,7 +27,7 @@ export const AuthCodeVerifyForm: React.FC<TProps> = ({
     });
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
+        <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
             <Field
                 title="Code"
                 input={<Input {...register('code')} autoFocus />}
@@ -37,6 +36,6 @@ export const AuthCodeVerifyForm: React.FC<TProps> = ({
             <Button type="submit" isLoading={isLoading}>
                 Sign In
             </Button>
-        </Form>
+        </form>
     );
 };

@@ -6,6 +6,8 @@
     display: flex;
     gap: 8px;
 
+    margin-block: 16px;
+
     font-size: 14px;
     line-height: 24px
 }

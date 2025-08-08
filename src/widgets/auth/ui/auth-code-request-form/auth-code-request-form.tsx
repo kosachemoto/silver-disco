@@ -8,7 +8,6 @@ import { Email } from '@/features/email/ui';
 
 import { Button } from '@/shared/ui/button';
 import { Checkbox } from '@/shared/ui/checkbox';
-import { Form } from '@/shared/ui/form';
 
 import type { TAuthCodeRequest } from '@/entities/auth/types';
 import { authCodeRequestSchema } from '@/entities/auth/utils';
@@ -32,7 +31,7 @@ export const AuthCodeRequestForm: React.FC<TProps> = ({
     });
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
+        <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
             <Email
                 {...register('email')}
                 autoFocus
@@ -43,6 +42,6 @@ export const AuthCodeRequestForm: React.FC<TProps> = ({
             <Button type="submit" isLoading={isLoading}>
                 Continue
             </Button>
-        </Form>
+        </form>
     );
 };
