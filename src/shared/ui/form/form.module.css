@@ -3,3 +3,7 @@
     flex-direction: column;
     gap: 16px;
 }
+
+.root > *:last-child {
+    margin-block-end: unset;
+}
