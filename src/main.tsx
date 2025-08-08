@@ -11,6 +11,8 @@ import { AuthSuccess } from '@/pages/auth/ui/auth-success';
 import { LoginLayout } from '@/widgets/login/ui/login-layout';
 import { RootLayout } from '@/widgets/root/ui/root-layout';
 
+import { fetchMockSetUp } from '@/entities/fetch/mock/utils';
+
 import './global.css';
 
 fetchMockSetUp();
