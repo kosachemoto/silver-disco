@@ -6,5 +6,11 @@ import type { LinkProps } from 'react-router';
 import styles from './link.module.css';
 
 export const Link: React.FC<LinkProps> = (props) => {
-    return <_Link {...props} className={clsx(styles.root, props.className)} />;
+    return (
+        <_Link
+            tabIndex={0}
+            {...props}
+            className={clsx(styles.root, props.className)}
+        />
+    );
 };

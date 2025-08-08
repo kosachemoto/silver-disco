@@ -8,5 +8,11 @@ type TProps = {
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 export const Input: React.FC<TProps> = (props) => {
-    return <input {...props} className={clsx(styles.root, props.className)} />;
+    return (
+        <input
+            tabIndex={0}
+            {...props}
+            className={clsx(styles.root, props.className)}
+        />
+    );
 };

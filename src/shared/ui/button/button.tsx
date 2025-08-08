@@ -18,6 +18,7 @@ export const Button: React.FC<React.PropsWithChildren<TProps>> = ({
 }) => {
     return (
         <button
+            tabIndex={0}
             {...props}
             className={clsx(
                 styles.root,
