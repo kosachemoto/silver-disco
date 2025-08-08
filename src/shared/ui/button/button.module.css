@@ -8,6 +8,7 @@
 
     width: 100%;
     margin: unset;
+    margin-block-end: 16px;
     padding-block: 12px;
     padding-inline: 16px;
     border: 2px solid var(--color-shape-primary);
