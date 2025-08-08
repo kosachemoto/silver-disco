@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
@@ -12,30 +13,36 @@ import { RootLayout } from '@/widgets/root/ui/root-layout';
 
 import './global.css';
 
+fetchMockSetUp();
+
+const queryClient = new QueryClient();
+
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <BrowserRouter>
-            <Routes>
-                <Route element={<RootLayout />}>
-                    <Route index element={<Navigate to="auth" replace />} />
-                    <Route path="auth" element={<LoginLayout />}>
-                        <Route
-                            index
-                            element={<Navigate to="code-request" replace />}
-                        />
-                        <Route
-                            path="code-request"
-                            element={<AuthCodeRequest />}
-                        />
-                        <Route
-                            path="code-verify"
-                            element={<AuthCodeVerify />}
-                        />
-                        <Route path="login" element={<AuthLogin />} />
-                        <Route path="success" element={<AuthSuccess />} />
+        <QueryClientProvider client={queryClient}>
+            <BrowserRouter>
+                <Routes>
+                    <Route element={<RootLayout />}>
+                        <Route index element={<Navigate to="auth" replace />} />
+                        <Route path="auth" element={<LoginLayout />}>
+                            <Route
+                                index
+                                element={<Navigate to="code-request" replace />}
+                            />
+                            <Route
+                                path="code-request"
+                                element={<AuthCodeRequest />}
+                            />
+                            <Route
+                                path="code-verify"
+                                element={<AuthCodeVerify />}
+                            />
+                            <Route path="login" element={<AuthLogin />} />
+                            <Route path="success" element={<AuthSuccess />} />
+                        </Route>
                     </Route>
-                </Route>
-            </Routes>
-        </BrowserRouter>
+                </Routes>
+            </BrowserRouter>
+        </QueryClientProvider>
     </StrictMode>
 );
