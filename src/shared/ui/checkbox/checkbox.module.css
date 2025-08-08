@@ -6,7 +6,7 @@
     display: flex;
     gap: 8px;
 
-    font-size: 16px;
+    font-size: 14px;
     line-height: 24px
 }
 
@@ -35,4 +35,8 @@
 
 .checkmark:checked {
     background-image: url('/icons/check.svg');
+}
+
+.children {
+    user-select: text;
 }

@@ -18,7 +18,7 @@ export const Checkbox: React.FC<React.PropsWithChildren<TProps>> = ({
                 {...props}
                 className={clsx(styles.checkmark, props.className)}
             />
-            {children}
+            <span className={styles.children}> {children}</span>
         </label>
     );
 };
