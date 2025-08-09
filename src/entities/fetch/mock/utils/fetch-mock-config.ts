@@ -29,7 +29,9 @@ export const fetchMockConfig: TFetchMockConfig = {
             if (email.startsWith('500')) {
                 return response500Creating();
             }
-        } catch (err) {}
+        } catch (err) {
+            console.warn('🎭 [err]', err);
+        }
 
         return response200Creating();
     },
@@ -41,7 +43,9 @@ export const fetchMockConfig: TFetchMockConfig = {
             if (email.startsWith('500')) {
                 return response500Creating();
             }
-        } catch (err) {}
+        } catch (err) {
+            console.warn('🎭 [err]', err);
+        }
 
         return response200Creating();
     },
@@ -77,7 +81,9 @@ export const fetchMockConfig: TFetchMockConfig = {
             if (code === '500') {
                 return response500Creating();
             }
-        } catch (err) {}
+        } catch (err) {
+            console.warn('🎭 [err]', err);
+        }
 
         return response200Creating();
     },
