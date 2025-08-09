@@ -16,7 +16,7 @@ import { Link } from '@/shared/ui/link';
 
 import type { TAuthCodeVerify } from '@/entities/auth/types';
 
-export const AuthSignInCodeVerify: React.FC = () => {
+export const AuthSignInVerification: React.FC = () => {
     const navigate = useNavigate();
     const { props, setApiError } = useAlert();
     const data = useAuthCodeRouteState();

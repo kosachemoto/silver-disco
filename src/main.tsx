@@ -4,9 +4,9 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 
 import { AuthLayout } from '@/pages/auth/ui/auth-layout';
-import { AuthSignInCode } from '@/pages/auth/ui/auth-sign-in-code';
-import { AuthSignInCodeVerify } from '@/pages/auth/ui/auth-sign-in-code-verify';
+import { AuthSignIn } from '@/pages/auth/ui/auth-sign-in';
 import { AuthSignInPassword } from '@/pages/auth/ui/auth-sign-in-password';
+import { AuthSignInVerification } from '@/pages/auth/ui/auth-sign-in-verification';
 import { AuthSuccess } from '@/pages/auth/ui/auth-success';
 import { AuthSignUp } from '@/pages/auth/ui/sign-up';
 
@@ -34,10 +34,10 @@ createRoot(document.getElementById('root')!).render(
                                 index
                                 element={<Navigate to="code" replace />}
                             />
-                            <Route path="code" element={<AuthSignInCode />} />
+                            <Route path="code" element={<AuthSignIn />} />
                             <Route
                                 path="code-verification"
-                                element={<AuthSignInCodeVerify />}
+                                element={<AuthSignInVerification />}
                             />
                             <Route
                                 path="password"

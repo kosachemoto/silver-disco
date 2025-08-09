@@ -17,7 +17,7 @@ import { List } from '@/shared/ui/list';
 
 import type { TAuthCodeRequest } from '@/entities/auth/types';
 
-export const AuthSignInCode: React.FC = () => {
+export const AuthSignIn: React.FC = () => {
     const { email } = useAuthCodeRouteState();
     const {
         props: propsButton,
