@@ -1,0 +1,15 @@
+.root {
+    padding: unset;
+    list-style-type: none;
+    appearance: none;
+}
+
+.root > .item:not(:first-child)::before {
+    content: '·';
+    margin-inline: 4px;
+}
+
+.item {
+    display: inline-block;
+    appearance: none;
+}
