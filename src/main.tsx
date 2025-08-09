@@ -26,24 +26,40 @@ createRoot(document.getElementById('root')!).render(
             <BrowserRouter>
                 <Routes>
                     <Route element={<RootLayout />}>
-                        <Route index element={<Navigate to="auth" replace />} />
+                        <Route
+                            index
+                            element={<Navigate to="/auth" replace />}
+                        />
                         <Route path="auth" element={<LoginLayout />}>
                             <Route
                                 index
-                                element={<Navigate to="code-request" replace />}
+                                element={<Navigate to="sign-in" replace />}
                             />
-                            <Route
-                                path="code-request"
-                                element={<AuthCodeRequest />}
-                            />
-                            <Route
-                                path="code-verify"
-                                element={<AuthCodeVerify />}
-                            />
-                            <Route path="login" element={<AuthLogin />} />
-                            <Route path="sign-up" element={<AuthSignUp />} />
+                            <Route path="sign-in">
+                                <Route
+                                    index
+                                    element={<Navigate to="code" replace />}
+                                />
+                                <Route
+                                    path="code"
+                                    element={<AuthCodeRequest />}
+                                />
+                                <Route
+                                    path="code-verification"
+                                    element={<AuthCodeVerify />}
+                                />
+                                <Route
+                                    path="password"
+                                    element={<AuthLogin />}
+                                />
+                            </Route>
                             <Route path="success" element={<AuthSuccess />} />
+                            <Route path="sign-up" element={<AuthSignUp />} />
                         </Route>
+                        <Route
+                            path="*"
+                            element={<Navigate to="/auth" replace />}
+                        />
                     </Route>
                 </Routes>
             </BrowserRouter>
