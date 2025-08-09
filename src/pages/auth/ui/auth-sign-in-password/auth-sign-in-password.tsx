@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router';
 
 import { useAuthPasskeyButton } from '@/pages/auth/hooks';
 
-import '@/widgets/auth/ui/auth-code-request-form';
-import { AuthLoginForm } from '@/widgets/auth/ui/auth-login-form';
+import '@/widgets/auth/ui/auth-sign-in-form';
+import { AuthSignInPasswordForm } from '@/widgets/auth/ui/auth-sign-in-password-form';
 
 import { useAuthPasskeyMutation } from '@/shared/api/auth/passkey/hooks';
 import { useAuthPasswordVerifyMutation } from '@/shared/api/auth/password/verify/hooks';
@@ -54,7 +54,7 @@ export const AuthSignInPassword: React.FC = () => {
         <>
             <h1>Login</h1>
             {authLoginMutation.isError && <Alert {...propsAlert} />}
-            <AuthLoginForm
+            <AuthSignInPasswordForm
                 onSubmit={authLogin}
                 isLoading={authLoginMutation.isPending}
             />

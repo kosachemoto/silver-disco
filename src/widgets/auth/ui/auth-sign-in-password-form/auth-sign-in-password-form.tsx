@@ -2,45 +2,49 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import noop from 'lodash/noop';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import type { DefaultValues, SubmitHandler } from 'react-hook-form';
+import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
 
 import { Email } from '@/features/email/ui';
+import { Password } from '@/features/password/ui';
 
 import { Button } from '@/shared/ui/button';
 import { Checkbox } from '@/shared/ui/checkbox';
 
-import type { TAuthCodeRequest } from '@/entities/auth/types';
-import { authCodeRequestSchema } from '@/entities/auth/utils';
+import type { TAuthLogin } from '@/entities/auth/types';
+import { authLoginSchema } from '@/entities/auth/utils';
 
 type TProps = {
-    onSubmit?: SubmitHandler<TAuthCodeRequest>;
-    onError?: SubmitHandler<TAuthCodeRequest>;
-    defaultValues?: DefaultValues<TAuthCodeRequest>;
+    onSubmit?: SubmitHandler<TAuthLogin>;
+    onError?: SubmitErrorHandler<Error>;
     isLoading?: boolean;
 };
 
-export const AuthCodeRequestForm: React.FC<TProps> = ({
+export const AuthSignInPasswordForm: React.FC<TProps> = ({
     onSubmit = noop,
     onError = noop,
-    defaultValues,
     isLoading,
 }) => {
-    const { register, formState, handleSubmit } = useForm<TAuthCodeRequest>({
-        resolver: zodResolver(authCodeRequestSchema),
-        defaultValues,
+    const { register, formState, handleSubmit } = useForm({
+        resolver: zodResolver(authLoginSchema),
     });
 
     return (
         <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
             <Email
                 {...register('email')}
-                autoFocus
                 title="Email"
+                autoFocus
+                autoComplete="email webauthn"
                 error={formState.errors.email?.message}
+            />
+            <Password
+                {...register('password')}
+                title="Password"
+                error={formState.errors.password?.message}
             />
             <Checkbox {...register('remember')}>Remember me</Checkbox>
             <Button type="submit" isLoading={isLoading}>
-                Continue
+                Sign In
             </Button>
         </form>
     );

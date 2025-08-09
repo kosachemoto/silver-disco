@@ -17,7 +17,7 @@ type TProps = {
     isLoading?: boolean;
 };
 
-export const AuthCodeVerifyForm: React.FC<TProps> = ({
+export const AuthSignInVerificationForm: React.FC<TProps> = ({
     onSubmit = noop,
     onError = noop,
     isLoading,

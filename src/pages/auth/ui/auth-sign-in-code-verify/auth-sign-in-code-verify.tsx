@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 
 import { useAuthCodeRouteState } from '@/pages/auth/hooks';
 
-import { AuthCodeVerifyForm } from '@/widgets/auth/ui/auth-code-verify-form';
+import { AuthSignInVerificationForm } from '@/widgets/auth/ui/auth-sign-in-verification-form';
 
 import { EmailLink } from '@/features/email/ui';
 
@@ -59,7 +59,7 @@ export const AuthSignInCodeVerify: React.FC = () => {
                 <EmailLink email={email} to="/auth/sign-in" state={{ email }} />
             )}
             <p>Enter the code sent to your email</p>
-            <AuthCodeVerifyForm
+            <AuthSignInVerificationForm
                 onSubmit={authCodeVerify}
                 isLoading={mutationVerify.isPending}
             />

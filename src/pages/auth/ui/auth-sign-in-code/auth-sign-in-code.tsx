@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { useAuthPasskeyButton } from '@/pages/auth/hooks';
 import { useAuthCodeRouteState } from '@/pages/auth/hooks';
 
-import { AuthCodeRequestForm } from '@/widgets/auth/ui/auth-code-request-form';
+import { AuthSignInForm } from '@/widgets/auth/ui/auth-sign-in-form';
 
 import { useAuthCodeRequestMutation } from '@/shared/api/auth/code/request/hooks';
 import { useAuthPasskeyMutation } from '@/shared/api/auth/passkey/hooks';
@@ -58,7 +58,7 @@ export const AuthSignInCode: React.FC = () => {
         <>
             <h1>Login</h1>
             {authCodeRequestMutation.isError && <Alert {...propsAlert} />}
-            <AuthCodeRequestForm
+            <AuthSignInForm
                 onSubmit={authCodeRequest}
                 defaultValues={{ email }}
                 isLoading={authCodeRequestMutation.isPending}
