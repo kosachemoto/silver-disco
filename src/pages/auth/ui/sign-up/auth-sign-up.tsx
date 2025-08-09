@@ -22,7 +22,7 @@ export const AuthSignUp: React.FC = () => {
     const authCodeRequest = (data: TAuthSignUp) => {
         authCodeRequestMutation.mutate(data, {
             onSuccess: () => {
-                navigate('/auth/code-verify', {
+                navigate('/auth/sign-in/code-verification', {
                     state: { email: data.email },
                 });
             },
@@ -42,10 +42,10 @@ export const AuthSignUp: React.FC = () => {
             <Divider>already have an account?</Divider>
             <List>
                 <List.Item>
-                    <Link to="/auth/code-request">Sign In with Email</Link>
+                    <Link to="/auth/sing-in">Sign In with Email</Link>
                 </List.Item>
                 <List.Item>
-                    <Link to="/auth/login">Or Password</Link>
+                    <Link to="/auth/sign-in/password">Or Password</Link>
                 </List.Item>
             </List>
         </>

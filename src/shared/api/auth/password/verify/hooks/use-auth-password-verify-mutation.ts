@@ -1,14 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { authLoginFetch } from '@/shared/api/auth/login/utils';
+import { authPasswordVerifyFetching } from '@/shared/api/auth/password/verify/utils';
 import type { ApiError } from '@/shared/api/utils';
 import { apiErrorHandling } from '@/shared/api/utils';
 
 import type { TAuthLogin } from '@/entities/auth/types';
 
-export const useAuthLoginMutation = () =>
+export const useAuthPasswordVerifyMutation = () =>
     useMutation<unknown, ApiError, TAuthLogin>({
         retry: false,
         mutationFn: (variables) =>
-            authLoginFetch(variables).then(apiErrorHandling),
+            authPasswordVerifyFetching(variables).then(apiErrorHandling),
     });

@@ -6,8 +6,8 @@ import { useAuthPasskeyButton } from '@/pages/auth/hooks';
 import '@/widgets/auth/ui/auth-code-request-form';
 import { AuthLoginForm } from '@/widgets/auth/ui/auth-login-form';
 
-import { useAuthLoginMutation } from '@/shared/api/auth/login/hooks';
 import { useAuthPasskeyMutation } from '@/shared/api/auth/passkey/hooks';
+import { useAuthPasswordVerifyMutation } from '@/shared/api/auth/password/verify/hooks';
 import { useAlert } from '@/shared/hooks/alert';
 import { Alert } from '@/shared/ui/alert';
 import { Button } from '@/shared/ui/button';
@@ -26,7 +26,7 @@ export const AuthLogin: React.FC = () => {
     } = useAuthPasskeyButton();
     const { props: propsAlert, setApiError } = useAlert();
     const navigate = useNavigate();
-    const authLoginMutation = useAuthLoginMutation();
+    const authLoginMutation = useAuthPasswordVerifyMutation();
     const authPasskeyMutation = useAuthPasskeyMutation();
 
     const authPasskey = () => {
@@ -69,7 +69,7 @@ export const AuthLogin: React.FC = () => {
                     <Link to="/auth/sign-up">Sing Up</Link>
                 </List.Item>
                 <List.Item>
-                    <Link to="/auth/code-request">Sign In with email</Link>
+                    <Link to="/auth/sign-in">Sign In with email</Link>
                 </List.Item>
             </List>
         </>

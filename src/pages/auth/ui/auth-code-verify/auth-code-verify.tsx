@@ -56,11 +56,7 @@ export const AuthCodeVerify: React.FC = () => {
             <h1>Verification</h1>
             {mutationVerify.isError && <Alert {...props} />}
             {email && (
-                <EmailLink
-                    email={email}
-                    to="/auth/code-request"
-                    state={{ email }}
-                />
+                <EmailLink email={email} to="/auth/sign-in" state={{ email }} />
             )}
             <p>Enter the code sent to your email</p>
             <AuthCodeVerifyForm
