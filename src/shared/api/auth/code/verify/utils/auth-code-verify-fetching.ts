@@ -1,6 +1,6 @@
 import type { TAuthCodeVerify } from '@/entities/auth/types';
 
-export const authCodeVerifyFetch = (data: TAuthCodeVerify) => {
+export const authCodeVerifyFetching = (data: TAuthCodeVerify) => {
     return fetch('/api/auth/code/verify', {
         method: 'POST',
         body: JSON.stringify(data),

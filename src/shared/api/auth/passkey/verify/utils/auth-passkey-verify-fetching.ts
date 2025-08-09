@@ -3,7 +3,7 @@ import { convertArrayBufferToBase64 } from '@/shared/utils';
 
 import type { TPublicKeyCredential } from '@/entities/navigator/credentials/types';
 
-export const authPasskeyVerifyFetch = (
+export const authPasskeyVerifyFetching = (
     data: TPublicKeyCredential | undefined
 ) => {
     if (!data) {

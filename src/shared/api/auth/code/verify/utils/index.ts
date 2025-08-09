@@ -1,1 +1,1 @@
-export { authCodeVerifyFetch } from './auth-code-verify-fetch';
+export { authCodeVerifyFetching } from './auth-code-verify-fetching';

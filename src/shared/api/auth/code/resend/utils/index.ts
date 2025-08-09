@@ -1,1 +1,1 @@
-export { authCodeResendFetch } from './use-auth-code-resend-fetch';
+export { authCodeResendFetching } from './use-auth-code-resend-fetching';

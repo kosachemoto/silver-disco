@@ -1,1 +1,1 @@
-export { authPasskeyVerifyFetch } from './auth-passkey-verify-fetch';
+export { authPasskeyVerifyFetching } from './auth-passkey-verify-fetching';
