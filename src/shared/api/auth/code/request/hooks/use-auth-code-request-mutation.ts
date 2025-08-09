@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 
 import { authCodeRequestFetching } from '@/shared/api/auth/code/request/utils';
-import type { ApiError } from '@/shared/api/utils';
-import { apiErrorHandling } from '@/shared/api/utils';
 
+import type { ApiError } from '@/entities/api-error/utils';
+import { apiErrorHandling } from '@/entities/api-error/utils';
 import type { TAuthCodeRequest } from '@/entities/auth/types';
 
 export const useAuthCodeRequestMutation = () =>

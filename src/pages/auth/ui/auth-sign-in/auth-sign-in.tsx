@@ -8,7 +8,6 @@ import { AuthSignInForm } from '@/widgets/auth/ui/auth-sign-in-form';
 
 import { useAuthCodeRequestMutation } from '@/shared/api/auth/code/request/hooks';
 import { useAuthPasskeyMutation } from '@/shared/api/auth/passkey/hooks';
-import type { ApiError } from '@/shared/api/utils';
 import { useAlertManager } from '@/shared/hooks/alert';
 import { Alert } from '@/shared/ui/alert';
 import { Button } from '@/shared/ui/button';
@@ -17,6 +16,7 @@ import { Link } from '@/shared/ui/link';
 import { List } from '@/shared/ui/list';
 import { convertApiErrorToProps } from '@/shared/utils/alert';
 
+import type { ApiError } from '@/entities/api-error/utils';
 import type { TAuthCodeRequest } from '@/entities/auth/types';
 
 export const AuthSignIn: React.FC = () => {

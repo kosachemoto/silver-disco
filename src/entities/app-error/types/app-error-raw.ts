@@ -1,4 +1,4 @@
-export type TApiErrorRaw = {
+export type TAppErrorRaw = {
     cause: string;
     message: string;
 };
