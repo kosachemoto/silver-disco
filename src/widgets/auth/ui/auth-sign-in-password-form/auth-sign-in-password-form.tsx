@@ -40,6 +40,7 @@ export const AuthSignInPasswordForm: React.FC<TProps> = ({
             <Password
                 {...register('password')}
                 title="Password"
+                autoComplete="current-password webauthn"
                 error={formState.errors.password?.message}
             />
             <Checkbox {...register('remember')}>Remember me</Checkbox>

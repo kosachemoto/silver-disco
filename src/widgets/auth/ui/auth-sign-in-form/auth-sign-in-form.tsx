@@ -35,6 +35,7 @@ export const AuthSignInForm: React.FC<TProps> = ({
             <Email
                 {...register('email')}
                 autoFocus
+                autoComplete="email webauthn"
                 title="Email"
                 error={formState.errors.email?.message}
             />
