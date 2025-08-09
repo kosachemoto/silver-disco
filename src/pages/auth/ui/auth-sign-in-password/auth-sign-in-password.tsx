@@ -17,7 +17,7 @@ import { List } from '@/shared/ui/list';
 
 import type { TAuthLogin } from '@/entities/auth/types';
 
-export const AuthLogin: React.FC = () => {
+export const AuthSignInPassword: React.FC = () => {
     const {
         props: propsButton,
         onStart,

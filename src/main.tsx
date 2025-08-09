@@ -3,9 +3,9 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 
-import { AuthCodeRequest } from '@/pages/auth/ui/auth-code-request';
-import { AuthCodeVerify } from '@/pages/auth/ui/auth-code-verify';
-import { AuthLogin } from '@/pages/auth/ui/auth-login';
+import { AuthSignInCode } from '@/pages/auth/ui/auth-sign-in-code';
+import { AuthSignInCodeVerify } from '@/pages/auth/ui/auth-sign-in-code-verify';
+import { AuthSignInPassword } from '@/pages/auth/ui/auth-sign-in-password';
 import { AuthSuccess } from '@/pages/auth/ui/auth-success';
 import { AuthSignUp } from '@/pages/auth/ui/sign-up';
 
@@ -42,15 +42,15 @@ createRoot(document.getElementById('root')!).render(
                                 />
                                 <Route
                                     path="code"
-                                    element={<AuthCodeRequest />}
+                                    element={<AuthSignInCode />}
                                 />
                                 <Route
                                     path="code-verification"
-                                    element={<AuthCodeVerify />}
+                                    element={<AuthSignInCodeVerify />}
                                 />
                                 <Route
                                     path="password"
-                                    element={<AuthLogin />}
+                                    element={<AuthSignInPassword />}
                                 />
                             </Route>
                             <Route path="success" element={<AuthSuccess />} />
