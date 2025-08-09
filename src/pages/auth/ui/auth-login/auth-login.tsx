@@ -12,6 +12,8 @@ import { useAlert } from '@/shared/hooks/alert';
 import { Alert } from '@/shared/ui/alert';
 import { Button } from '@/shared/ui/button';
 import { Divider } from '@/shared/ui/divider';
+import { Link } from '@/shared/ui/link';
+import { List } from '@/shared/ui/list';
 
 import type { TAuthLogin } from '@/entities/auth/types';
 
@@ -62,6 +64,14 @@ export const AuthLogin: React.FC = () => {
                 onClick={authPasskey}
                 {...propsButton}
             />
+            <List>
+                <List.Item>
+                    <Link to="/auth/sign-up">Sing Up</Link>
+                </List.Item>
+                <List.Item>
+                    <Link to="/auth/code-request">Sign In with email</Link>
+                </List.Item>
+            </List>
         </>
     );
 };

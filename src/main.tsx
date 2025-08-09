@@ -7,6 +7,7 @@ import { AuthCodeRequest } from '@/pages/auth/ui/auth-code-request';
 import { AuthCodeVerify } from '@/pages/auth/ui/auth-code-verify';
 import { AuthLogin } from '@/pages/auth/ui/auth-login';
 import { AuthSuccess } from '@/pages/auth/ui/auth-success';
+import { AuthSignUp } from '@/pages/auth/ui/sign-up';
 
 import { LoginLayout } from '@/widgets/login/ui/login-layout';
 import { RootLayout } from '@/widgets/root/ui/root-layout';
@@ -40,6 +41,7 @@ createRoot(document.getElementById('root')!).render(
                                 element={<AuthCodeVerify />}
                             />
                             <Route path="login" element={<AuthLogin />} />
+                            <Route path="sign-up" element={<AuthSignUp />} />
                             <Route path="success" element={<AuthSuccess />} />
                         </Route>
                     </Route>
