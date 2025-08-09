@@ -40,6 +40,18 @@ export const fetchMockConfig: TFetchMockConfig = {
             const body = await bodyParsing(init);
             const email = get(body, 'email');
 
+            if (email.startsWith('invalid')) {
+                return new Response(
+                    JSON.stringify({
+                        error: {
+                            id: 'auth.login.invalid',
+                            message: 'Wrong email & password combination',
+                        },
+                    }),
+                    { status: 401 }
+                );
+            }
+
             if (email.startsWith('500')) {
                 return response500Creating();
             }
