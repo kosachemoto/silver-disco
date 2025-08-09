@@ -55,16 +55,14 @@ export const AuthCodeVerify: React.FC = () => {
         <>
             <h1>Verification</h1>
             {mutationVerify.isError && <Alert {...props} />}
-            <div>
-                {email && (
-                    <EmailLink
-                        email={email}
-                        to="/auth/code-request"
-                        state={{ email }}
-                    />
-                )}
-                <p>Enter the code sent to your email</p>
-            </div>
+            {email && (
+                <EmailLink
+                    email={email}
+                    to="/auth/code-request"
+                    state={{ email }}
+                />
+            )}
+            <p>Enter the code sent to your email</p>
             <AuthCodeVerifyForm
                 onSubmit={authCodeVerify}
                 isLoading={mutationVerify.isPending}
