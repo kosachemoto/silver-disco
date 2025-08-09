@@ -9,7 +9,7 @@ import { response200Creating } from './response200-creating';
 import { response500Creating } from './response500-creating';
 
 export const fetchMockConfig: TFetchMockConfig = {
-    '/api/auth/login': async (init) => {
+    '/api/auth/password/verify': async (init) => {
         try {
             const body = await bodyParsing(init);
             const email = get(body, 'email');
