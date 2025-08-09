@@ -1,9 +1,9 @@
 import React from 'react';
 import { Outlet } from 'react-router';
 
-import styles from './login-layout.module.css';
+import styles from './auth-layout.module.css';
 
-export const LoginLayout: React.FC = () => {
+export const AuthLayout: React.FC = () => {
     return (
         <section className={styles.root}>
             <Outlet />

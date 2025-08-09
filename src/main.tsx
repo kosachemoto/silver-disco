@@ -9,7 +9,7 @@ import { AuthSignInPassword } from '@/pages/auth/ui/auth-sign-in-password';
 import { AuthSuccess } from '@/pages/auth/ui/auth-success';
 import { AuthSignUp } from '@/pages/auth/ui/sign-up';
 
-import { LoginLayout } from '@/widgets/login/ui/login-layout';
+import { AuthLayout } from '@/widgets/auth/ui/auth-layout';
 import { RootLayout } from '@/widgets/root/ui/root-layout';
 
 import { fetchMockSetUp } from '@/entities/fetch/mock/utils';
@@ -30,7 +30,7 @@ createRoot(document.getElementById('root')!).render(
                             index
                             element={<Navigate to="/auth" replace />}
                         />
-                        <Route path="auth" element={<LoginLayout />}>
+                        <Route path="auth" element={<AuthLayout />}>
                             <Route
                                 index
                                 element={<Navigate to="sign-in" replace />}
