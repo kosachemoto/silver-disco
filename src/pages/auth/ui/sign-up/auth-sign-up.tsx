@@ -6,17 +6,18 @@ import { useAuthCodeRouteState } from '@/pages/auth/hooks';
 import { AuthSignUpForm } from '@/widgets/auth/ui/auth-sign-up-form';
 
 import { useAuthCodeRequestMutation } from '@/shared/api/auth/code/request/hooks';
-import { useAlert } from '@/shared/hooks/alert';
+import { useAlertManager } from '@/shared/hooks/alert';
 import { Alert } from '@/shared/ui/alert';
 import { Divider } from '@/shared/ui/divider';
 import { Link } from '@/shared/ui/link';
 import { List } from '@/shared/ui/list';
+import { convertApiErrorToProps } from '@/shared/utils/alert';
 
 import type { TAuthSignUp } from '@/entities/auth/types';
 
 export const AuthSignUp: React.FC = () => {
     const { email } = useAuthCodeRouteState();
-    const { props: propsAlert, setApiError } = useAlert();
+    const { queue, unshift } = useAlertManager();
     const navigate = useNavigate();
     const authCodeRequestMutation = useAuthCodeRequestMutation();
     const authCodeRequest = (data: TAuthSignUp) => {
@@ -26,14 +27,14 @@ export const AuthSignUp: React.FC = () => {
                     state: { email: data.email },
                 });
             },
-            onError: setApiError,
+            onError: (error) => unshift(convertApiErrorToProps(error)),
         });
     };
 
     return (
         <>
             <h1>Sign Up</h1>
-            {authCodeRequestMutation.isError && <Alert {...propsAlert} />}
+            {queue.map(Alert)}
             <AuthSignUpForm
                 onSubmit={authCodeRequest}
                 defaultValues={{ email }}

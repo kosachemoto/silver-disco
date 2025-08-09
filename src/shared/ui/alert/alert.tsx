@@ -1,19 +1,20 @@
 import clsx from 'clsx';
 import React from 'react';
 
+import type { TPropsWithKey } from '@/entities/react/types';
+
 import styles from './alert.module.css';
 
 type TProps = {
     variant?: 'error' | 'warn' | 'success';
 } & React.HTMLAttributes<HTMLDivElement>;
 
-export const Alert: React.FC<React.PropsWithChildren<TProps>> = ({
-    children,
-    variant = 'error',
-    ...props
-}) => {
+export const Alert: React.FC<
+    React.PropsWithChildren<TPropsWithKey<TProps>>
+> = ({ key, children, variant = 'error', ...props }) => {
     return (
         <div
+            key={key}
             {...props}
             className={clsx(
                 styles.root,

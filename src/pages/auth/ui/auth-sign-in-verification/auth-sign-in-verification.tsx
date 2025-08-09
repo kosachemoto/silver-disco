@@ -9,16 +9,17 @@ import { EmailLink } from '@/features/email/ui';
 
 import { useAuthCodeResendMutation } from '@/shared/api/auth/code/resend/hooks';
 import { useAuthCodeVerifyMutation } from '@/shared/api/auth/code/verify/hooks';
-import { useAlert } from '@/shared/hooks/alert';
+import { useAlertManager } from '@/shared/hooks/alert';
 import { Alert } from '@/shared/ui/alert';
 import { Button } from '@/shared/ui/button';
 import { Link } from '@/shared/ui/link';
+import { convertApiErrorToProps } from '@/shared/utils/alert';
 
 import type { TAuthCodeVerify } from '@/entities/auth/types';
 
 export const AuthSignInVerification: React.FC = () => {
     const navigate = useNavigate();
-    const { props, setApiError } = useAlert();
+    const { queue, unshift } = useAlertManager();
     const data = useAuthCodeRouteState();
     const { email } = data;
     const mutationVerify = useAuthCodeVerifyMutation();
@@ -41,7 +42,9 @@ export const AuthSignInVerification: React.FC = () => {
             onSuccess: () => {
                 navigate('/auth/success');
             },
-            onError: setApiError,
+            onError: (error) => {
+                unshift(convertApiErrorToProps(error));
+            },
         });
     };
 
@@ -54,7 +57,7 @@ export const AuthSignInVerification: React.FC = () => {
     return (
         <>
             <h1>Verification</h1>
-            {mutationVerify.isError && <Alert {...props} />}
+            {queue.map(Alert)}
             {email && (
                 <EmailLink email={email} to="/auth/sign-in" state={{ email }} />
             )}

@@ -1,1 +1,1 @@
-export { useAlert } from './use-alert';
+export { useAlertManager } from './use-alert-manager';

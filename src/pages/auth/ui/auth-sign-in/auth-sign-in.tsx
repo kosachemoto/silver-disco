@@ -8,12 +8,14 @@ import { AuthSignInForm } from '@/widgets/auth/ui/auth-sign-in-form';
 
 import { useAuthCodeRequestMutation } from '@/shared/api/auth/code/request/hooks';
 import { useAuthPasskeyMutation } from '@/shared/api/auth/passkey/hooks';
-import { useAlert } from '@/shared/hooks/alert';
+import type { ApiError } from '@/shared/api/utils';
+import { useAlertManager } from '@/shared/hooks/alert';
 import { Alert } from '@/shared/ui/alert';
 import { Button } from '@/shared/ui/button';
 import { Divider } from '@/shared/ui/divider';
 import { Link } from '@/shared/ui/link';
 import { List } from '@/shared/ui/list';
+import { convertApiErrorToProps } from '@/shared/utils/alert';
 
 import type { TAuthCodeRequest } from '@/entities/auth/types';
 
@@ -25,10 +27,14 @@ export const AuthSignIn: React.FC = () => {
         onSuccess,
         onError,
     } = useAuthPasskeyButton();
-    const { props: propsAlert, setApiError } = useAlert();
+    const { queue, unshift } = useAlertManager({ variant: 'error' });
     const navigate = useNavigate();
     const authCodeRequestMutation = useAuthCodeRequestMutation();
     const authPasskeyMutation = useAuthPasskeyMutation();
+    const unshiftApiErorr = (error: ApiError) => {
+        unshift(convertApiErrorToProps(error));
+    };
+
     const authCodeRequest = (data: TAuthCodeRequest) => {
         authCodeRequestMutation.mutate(data, {
             onSuccess: () => {
@@ -36,7 +42,7 @@ export const AuthSignIn: React.FC = () => {
                     state: { email: data.email },
                 });
             },
-            onError: setApiError,
+            onError: unshiftApiErorr,
         });
     };
 
@@ -49,15 +55,15 @@ export const AuthSignIn: React.FC = () => {
             },
             onError: (err) => {
                 onError();
-                setApiError(err);
+                unshiftApiErorr(err);
             },
         });
     };
 
     return (
         <>
-            <h1>Login</h1>
-            {authCodeRequestMutation.isError && <Alert {...propsAlert} />}
+            <h1>Sing In</h1>
+            {queue.map(Alert)}
             <AuthSignInForm
                 onSubmit={authCodeRequest}
                 defaultValues={{ email }}

@@ -8,12 +8,14 @@ import { AuthSignInPasswordForm } from '@/widgets/auth/ui/auth-sign-in-password-
 
 import { useAuthPasskeyMutation } from '@/shared/api/auth/passkey/hooks';
 import { useAuthPasswordVerifyMutation } from '@/shared/api/auth/password/verify/hooks';
-import { useAlert } from '@/shared/hooks/alert';
+import type { ApiError } from '@/shared/api/utils';
+import { useAlertManager } from '@/shared/hooks/alert';
 import { Alert } from '@/shared/ui/alert';
 import { Button } from '@/shared/ui/button';
 import { Divider } from '@/shared/ui/divider';
 import { Link } from '@/shared/ui/link';
 import { List } from '@/shared/ui/list';
+import { convertApiErrorToProps } from '@/shared/utils/alert';
 
 import type { TAuthLogin } from '@/entities/auth/types';
 
@@ -24,10 +26,13 @@ export const AuthSignInPassword: React.FC = () => {
         onSuccess,
         onError,
     } = useAuthPasskeyButton();
-    const { props: propsAlert, setApiError } = useAlert();
+    const { queue, unshift } = useAlertManager({ variant: 'error' });
     const navigate = useNavigate();
     const authLoginMutation = useAuthPasswordVerifyMutation();
     const authPasskeyMutation = useAuthPasskeyMutation();
+    const unshiftApiErorr = (error: ApiError) => {
+        unshift(convertApiErrorToProps(error));
+    };
 
     const authPasskey = () => {
         onStart();
@@ -38,7 +43,7 @@ export const AuthSignInPassword: React.FC = () => {
             },
             onError: (err) => {
                 onError();
-                setApiError(err);
+                unshiftApiErorr(err);
             },
         });
     };
@@ -46,14 +51,14 @@ export const AuthSignInPassword: React.FC = () => {
     const authLogin = (data: TAuthLogin) => {
         authLoginMutation.mutate(data, {
             onSuccess: () => navigate('/auth/success'),
-            onError: setApiError,
+            onError: unshiftApiErorr,
         });
     };
 
     return (
         <>
             <h1>Login</h1>
-            {authLoginMutation.isError && <Alert {...propsAlert} />}
+            {queue.map(Alert)}
             <AuthSignInPasswordForm
                 onSubmit={authLogin}
                 isLoading={authLoginMutation.isPending}
