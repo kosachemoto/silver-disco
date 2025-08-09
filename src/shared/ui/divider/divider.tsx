@@ -13,7 +13,7 @@ export const Divider: React.FC<React.PropsWithChildren<TProps>> = ({
 }) => {
     return (
         <div className={clsx(styles.root, className)}>
-            <span className={styles.label}>{children}</span>
+            {children && <span className={styles.label}>{children}</span>}
         </div>
     );
 };
