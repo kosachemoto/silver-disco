@@ -41,7 +41,7 @@ export const AuthSignInForm: React.FC<TProps> = ({
                 error={formState.errors.email?.message}
             />
             <Checkbox {...register('remember')}>Remember me</Checkbox>
-            <Button type="submit" isLoading={isLoading}>
+            <Button type="submit" isLoading={isLoading} disabled={isLoading}>
                 Continue
             </Button>
         </form>

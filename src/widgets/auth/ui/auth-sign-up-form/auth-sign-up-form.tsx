@@ -37,7 +37,7 @@ export const AuthSignUpForm: React.FC<TProps> = ({
                 title="Email"
                 error={formState.errors.email?.message}
             />
-            <Button type="submit" isLoading={isLoading}>
+            <Button type="submit" isLoading={isLoading} disabled={isLoading}>
                 Continue
             </Button>
         </form>

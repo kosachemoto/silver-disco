@@ -33,7 +33,7 @@ export const AuthSignInVerifyForm: React.FC<TProps> = ({
                 input={<Input {...register('code')} autoFocus />}
                 error={formState.errors.code?.message}
             />
-            <Button type="submit" isLoading={isLoading}>
+            <Button type="submit" isLoading={isLoading} disabled={isLoading}>
                 Sign In
             </Button>
         </form>

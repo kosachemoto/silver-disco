@@ -44,7 +44,7 @@ export const AuthSignInPasswordForm: React.FC<TProps> = ({
                 error={formState.errors.password?.message}
             />
             <Checkbox {...register('remember')}>Remember me</Checkbox>
-            <Button type="submit" isLoading={isLoading}>
+            <Button type="submit" isLoading={isLoading} disabled={isLoading}>
                 Sign In
             </Button>
         </form>
