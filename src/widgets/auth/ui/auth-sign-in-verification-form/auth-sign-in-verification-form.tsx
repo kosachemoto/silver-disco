@@ -8,22 +8,22 @@ import { Button } from '@/shared/ui/button';
 import { Field } from '@/shared/ui/field';
 import { Input } from '@/shared/ui/input';
 
-import type { TAuthCodeVerify } from '@/entities/auth/types';
-import { authCodeVerifySchema } from '@/entities/auth/utils';
+import type { TAuthSignInCodeVerify } from '@/entities/auth/types';
+import { authSignInCodeVerifySchema } from '@/entities/auth/utils';
 
 type TProps = {
-    onSubmit?: SubmitHandler<TAuthCodeVerify>;
-    onError?: SubmitHandler<TAuthCodeVerify>;
+    onSubmit?: SubmitHandler<TAuthSignInCodeVerify>;
+    onError?: SubmitHandler<TAuthSignInCodeVerify>;
     isLoading?: boolean;
 };
 
-export const AuthSignInVerificationForm: React.FC<TProps> = ({
+export const AuthSignInVerifyForm: React.FC<TProps> = ({
     onSubmit = noop,
     onError = noop,
     isLoading,
 }) => {
     const { register, formState, handleSubmit } = useForm({
-        resolver: zodResolver(authCodeVerifySchema),
+        resolver: zodResolver(authSignInCodeVerifySchema),
     });
 
     return (

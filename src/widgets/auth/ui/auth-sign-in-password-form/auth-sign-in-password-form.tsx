@@ -10,11 +10,11 @@ import { Password } from '@/features/password/ui';
 import { Button } from '@/shared/ui/button';
 import { Checkbox } from '@/shared/ui/checkbox';
 
-import type { TAuthLogin } from '@/entities/auth/types';
-import { authLoginSchema } from '@/entities/auth/utils';
+import type { TAuthSignInPassword } from '@/entities/auth/types';
+import { authSignInPasswordSchema } from '@/entities/auth/utils';
 
 type TProps = {
-    onSubmit?: SubmitHandler<TAuthLogin>;
+    onSubmit?: SubmitHandler<TAuthSignInPassword>;
     onError?: SubmitErrorHandler<Error>;
     isLoading?: boolean;
 };
@@ -25,7 +25,7 @@ export const AuthSignInPasswordForm: React.FC<TProps> = ({
     isLoading,
 }) => {
     const { register, formState, handleSubmit } = useForm({
-        resolver: zodResolver(authLoginSchema),
+        resolver: zodResolver(authSignInPasswordSchema),
     });
 
     return (

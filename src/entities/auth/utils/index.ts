@@ -1,5 +1,5 @@
-export { authCodeRequestSchema } from './auth-code-request-schema';
-export { authCodeVerifySchema } from './auth-code-verify-schema';
-export { authCodeResendSchema } from './auth-code-resend-schema';
-export { authLoginSchema } from './auth-login-schema';
+export { authSignInCodeRequestSchema } from './auth-sing-in-code-request-schema';
+export { authSignInCodeVerifySchema } from './auth-sign-in-code-verify-schema';
+export { authSignInCodeResendSchema } from './auth-sign-in-code-resend-schema';
+export { authSignInPasswordSchema } from './auth-sign-in-password-schema';
 export { authSignUpSchema } from './auth-sign-up-schema';

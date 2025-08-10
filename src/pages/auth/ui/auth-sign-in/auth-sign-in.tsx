@@ -6,8 +6,8 @@ import { useAuthCodeRouteState } from '@/pages/auth/hooks';
 
 import { AuthSignInForm } from '@/widgets/auth/ui/auth-sign-in-form';
 
-import { useAuthCodeRequestMutation } from '@/shared/api/auth/code/request/hooks';
-import { useAuthPasskeyMutation } from '@/shared/api/auth/passkey/hooks';
+import { useAuthSignInCodeRequestMutation } from '@/shared/api/auth/sign-in/code/request/hooks';
+import { useAuthSignInPasskeyMutation } from '@/shared/api/auth/sign-in/passkey/hooks';
 import { useAlertManager } from '@/shared/hooks/alert';
 import { Alert } from '@/shared/ui/alert';
 import { Button } from '@/shared/ui/button';
@@ -17,7 +17,7 @@ import { List } from '@/shared/ui/list';
 import { convertApiErrorToProps } from '@/shared/utils/alert';
 
 import type { ApiError } from '@/entities/api-error/utils';
-import type { TAuthCodeRequest } from '@/entities/auth/types';
+import type { TAuthSignInCodeRequest } from '@/entities/auth/types';
 
 export const AuthSignIn: React.FC = () => {
     const { email } = useAuthCodeRouteState();
@@ -29,13 +29,13 @@ export const AuthSignIn: React.FC = () => {
     } = useAuthPasskeyButton();
     const { queue, unshift } = useAlertManager({ variant: 'error' });
     const navigate = useNavigate();
-    const authCodeRequestMutation = useAuthCodeRequestMutation();
-    const authPasskeyMutation = useAuthPasskeyMutation();
+    const authCodeRequestMutation = useAuthSignInCodeRequestMutation();
+    const authPasskeyMutation = useAuthSignInPasskeyMutation();
     const unshiftApiErorr = (error: ApiError) => {
         unshift(convertApiErrorToProps(error));
     };
 
-    const authCodeRequest = (data: TAuthCodeRequest) => {
+    const authCodeRequest = (data: TAuthSignInCodeRequest) => {
         authCodeRequestMutation.mutate(data, {
             onSuccess: () => {
                 navigate('/auth/sign-in/code-verification', {

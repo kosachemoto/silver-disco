@@ -5,7 +5,7 @@ import { useAuthCodeRouteState } from '@/pages/auth/hooks';
 
 import { AuthSignUpForm } from '@/widgets/auth/ui/auth-sign-up-form';
 
-import { useAuthCodeRequestMutation } from '@/shared/api/auth/code/request/hooks';
+import { useAuthSignInCodeRequestMutation } from '@/shared/api/auth/sign-in/code/request/hooks';
 import { useAlertManager } from '@/shared/hooks/alert';
 import { Alert } from '@/shared/ui/alert';
 import { Divider } from '@/shared/ui/divider';
@@ -19,7 +19,7 @@ export const AuthSignUp: React.FC = () => {
     const { email } = useAuthCodeRouteState();
     const { queue, unshift } = useAlertManager();
     const navigate = useNavigate();
-    const authCodeRequestMutation = useAuthCodeRequestMutation();
+    const authCodeRequestMutation = useAuthSignInCodeRequestMutation();
     const authCodeRequest = (data: TAuthSignUp) => {
         authCodeRequestMutation.mutate(data, {
             onSuccess: () => {

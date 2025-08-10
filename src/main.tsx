@@ -6,7 +6,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { AuthLayout } from '@/pages/auth/ui/auth-layout';
 import { AuthSignIn } from '@/pages/auth/ui/auth-sign-in';
 import { AuthSignInPassword } from '@/pages/auth/ui/auth-sign-in-password';
-import { AuthSignInVerification } from '@/pages/auth/ui/auth-sign-in-verification';
+import { AuthSignInVerify } from '@/pages/auth/ui/auth-sign-in-verify';
 import { AuthSuccess } from '@/pages/auth/ui/auth-success';
 import { AuthSignUp } from '@/pages/auth/ui/sign-up';
 
@@ -37,7 +37,7 @@ createRoot(document.getElementById('root')!).render(
                             <Route path="code" element={<AuthSignIn />} />
                             <Route
                                 path="code-verification"
-                                element={<AuthSignInVerification />}
+                                element={<AuthSignInVerify />}
                             />
                             <Route
                                 path="password"
