@@ -4,6 +4,10 @@ import type { ApiError } from '@/entities/api-error/utils';
 
 type AlertType = React.ComponentProps<typeof Alert>;
 
-export const convertApiErrorToProps = ({ message }: ApiError): AlertType => ({
-    children: message,
-});
+export const convertApiErrorToProps = (error: ApiError): AlertType => {
+    console.error(error);
+
+    return {
+        children: error.message,
+    };
+};
