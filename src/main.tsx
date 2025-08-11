@@ -5,6 +5,7 @@ import {
     createRootRoute,
     createRoute,
     createRouter,
+    redirect,
 } from '@tanstack/react-router';
 import type { LinkProps } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
@@ -84,16 +85,49 @@ const successRoute = createRoute({
     component: AuthSuccess,
 });
 
+const catchAuthSignInRoute = createRoute({
+    getParentRoute: () => authRoute,
+    path: 'sign-in/$$rest*',
+    beforeLoad: () => {
+        throw redirect({
+            to: '/auth/sign-in',
+        });
+    },
+});
+
+const catchAuthRoute = createRoute({
+    getParentRoute: () => authRoute,
+    path: '/$',
+    beforeLoad: () => {
+        throw redirect({
+            to: '/auth/sign-up',
+        });
+    },
+});
+
+const catchRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: '$',
+    beforeLoad: () => {
+        throw redirect({
+            to: '/auth',
+        });
+    },
+});
+
 const routeTree = rootRoute.addChildren([
     authRoute.addChildren([
-        signInRoute,
-        signInVerificationRoute,
-        signInPasswordRoute,
         signUpRoute,
         signUpVerificationRoute,
         signUpPasskeyRoute,
+        signInRoute,
+        signInVerificationRoute,
+        signInPasswordRoute,
         successRoute,
+        catchAuthSignInRoute,
+        catchAuthRoute,
     ]),
+    catchRoute,
 ]);
 
 const router = createRouter({ routeTree, basepath: '/silver-disco' });
