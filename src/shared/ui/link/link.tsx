@@ -1,11 +1,15 @@
+import { Link as _Link } from '@tanstack/react-router';
+import type { LinkProps } from '@tanstack/react-router';
 import clsx from 'clsx';
 import React from 'react';
-import { Link as _Link } from 'react-router';
-import type { LinkProps } from 'react-router';
 
 import styles from './link.module.css';
 
-export const Link: React.FC<LinkProps> = (props) => {
+type TProps = LinkProps & {
+    className?: string;
+};
+
+export const Link: React.FC<TProps> = (props) => {
     return (
         <_Link
             tabIndex={0}

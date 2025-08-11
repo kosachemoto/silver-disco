@@ -1,7 +1,5 @@
+import { useLocation, useRouter } from '@tanstack/react-router';
 import React from 'react';
-import { useNavigate } from 'react-router';
-
-import { useAuthCodeRouteState } from '@/pages/auth/hooks';
 
 import { AuthSignInVerifyForm } from '@/widgets/auth/ui/auth-sign-in-verification-form';
 
@@ -16,12 +14,12 @@ import { Link } from '@/shared/ui/link';
 import { convertApiErrorToProps } from '@/shared/utils/alert';
 
 import type { TAuthSignInCodeVerify } from '@/entities/auth/types';
-import { routes } from '@/entities/routes/utils';
 
 export const AuthSignInVerify: React.FC = () => {
-    const navigate = useNavigate();
+    const router = useRouter();
+    const location = useLocation();
+    const { email, from } = location.state;
     const { queue, unshift } = useAlertManager();
-    const { email, from } = useAuthCodeRouteState();
     const mutationVerify = useAuthSignInCodeVerifyMutation();
     const mutationResend = useAuthSignInCodeResendMutation();
 
@@ -38,7 +36,7 @@ export const AuthSignInVerify: React.FC = () => {
     const authCodeVerify = (data: TAuthSignInCodeVerify) => {
         mutationVerify.mutate(data, {
             onSuccess: () => {
-                navigate(routes.auth.success.path);
+                router.navigate({ to: '/auth/success' });
             },
             onError: (error) => {
                 unshift(convertApiErrorToProps(error));

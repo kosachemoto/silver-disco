@@ -1,9 +1,8 @@
+import { useLocation, useRouter } from '@tanstack/react-router';
+import { Outlet } from '@tanstack/react-router';
 import React from 'react';
-import { useNavigate } from 'react-router';
-import { useLocation } from 'react-router';
 
 import { useAuthPasskeyButton } from '@/pages/auth/hooks';
-import { useAuthCodeRouteState } from '@/pages/auth/hooks';
 
 import { AuthSignInForm } from '@/widgets/auth/ui/auth-sign-in-form';
 
@@ -19,11 +18,11 @@ import { convertApiErrorToProps } from '@/shared/utils/alert';
 
 import type { ApiError } from '@/entities/api-error/utils';
 import type { TAuthSignInCodeRequest } from '@/entities/auth/types';
-import { routes } from '@/entities/routes/utils';
 
 export const AuthSignIn: React.FC = () => {
+    const router = useRouter();
     const location = useLocation();
-    const { email } = useAuthCodeRouteState();
+    const { email } = location.state;
     const {
         props: propsButton,
         onStart,
@@ -31,7 +30,6 @@ export const AuthSignIn: React.FC = () => {
         onError,
     } = useAuthPasskeyButton();
     const { queue, unshift } = useAlertManager({ variant: 'error' });
-    const navigate = useNavigate();
     const authCodeRequestMutation = useAuthSignInCodeRequestMutation();
     const authPasskeyMutation = useAuthSignInPasskeyMutation();
     const unshiftApiErorr = (error: ApiError) => {
@@ -41,8 +39,9 @@ export const AuthSignIn: React.FC = () => {
     const authCodeRequest = (data: TAuthSignInCodeRequest) => {
         authCodeRequestMutation.mutate(data, {
             onSuccess: () => {
-                navigate(routes.auth['sign-in']['verification'].path, {
-                    state: { email: data.email, from: location.pathname },
+                router.navigate({
+                    to: '/auth/sign-in/verification',
+                    state: { email: data.email, from: '/auth/sign-in' },
                 });
             },
             onError: unshiftApiErorr,
@@ -54,7 +53,7 @@ export const AuthSignIn: React.FC = () => {
         authPasskeyMutation.mutate(undefined, {
             onSuccess: () => {
                 onSuccess();
-                navigate(routes.auth.success.path);
+                router.navigate({ to: '/auth/success' });
             },
             onError: (err) => {
                 onError();
@@ -78,12 +77,13 @@ export const AuthSignIn: React.FC = () => {
                 onClick={authPasskey}
                 {...propsButton}
             />
+            <Outlet />
             <List>
                 <List.Item>
-                    <Link to={routes.auth['sign-up'].path}>Sing Up</Link>
+                    <Link to="/auth/sign-up">Sing Up</Link>
                 </List.Item>
                 <List.Item>
-                    <Link to={routes.auth['sign-in'].password.path}>
+                    <Link to="/auth/sign-in/password">
                         Sign In with password
                     </Link>
                 </List.Item>

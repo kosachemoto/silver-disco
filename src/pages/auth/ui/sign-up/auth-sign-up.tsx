@@ -1,8 +1,5 @@
+import { useLocation, useRouter } from '@tanstack/react-router';
 import React from 'react';
-import { useNavigate } from 'react-router';
-import { useLocation } from 'react-router';
-
-import { useAuthCodeRouteState } from '@/pages/auth/hooks';
 
 import { AuthSignUpForm } from '@/widgets/auth/ui/auth-sign-up-form';
 
@@ -15,19 +12,22 @@ import { List } from '@/shared/ui/list';
 import { convertApiErrorToProps } from '@/shared/utils/alert';
 
 import type { TAuthSignUp } from '@/entities/auth/types';
-import { routes } from '@/entities/routes/utils';
 
 export const AuthSignUp: React.FC = () => {
+    const router = useRouter();
     const location = useLocation();
-    const { email } = useAuthCodeRouteState();
+    const { email } = location.state;
     const { queue, unshift } = useAlertManager();
-    const navigate = useNavigate();
     const authCodeRequestMutation = useAuthSignInCodeRequestMutation();
     const authCodeRequest = (data: TAuthSignUp) => {
         authCodeRequestMutation.mutate(data, {
             onSuccess: () => {
-                navigate(routes.auth['sign-up']['verification'].path, {
-                    state: { email: data.email, from: location.pathname },
+                router.navigate({
+                    to: '/auth/sign-up/verification',
+                    state: {
+                        email: data.email,
+                        from: '/auth/sign-up',
+                    },
                 });
             },
             onError: (error) => unshift(convertApiErrorToProps(error)),
@@ -45,22 +45,16 @@ export const AuthSignUp: React.FC = () => {
             />
             <List>
                 <List.Item>
-                    <Link to={routes['auth']['sign-up-passkey'].path}>
-                        Sing Up with passkey
-                    </Link>
+                    <Link to="/auth/sign-up/passkey">Sing Up with passkey</Link>
                 </List.Item>
             </List>
             <Divider>already have an account?</Divider>
             <List>
                 <List.Item>
-                    <Link to={routes['auth']['sign-in'].path}>
-                        Sign In with Email
-                    </Link>
+                    <Link to="/auth/sign-in">Sign In with Email</Link>
                 </List.Item>
                 <List.Item>
-                    <Link to={routes['auth']['sign-in'].password.path}>
-                        Or Password
-                    </Link>
+                    <Link to="/auth/sign-in/password">Or Password</Link>
                 </List.Item>
             </List>
         </>
