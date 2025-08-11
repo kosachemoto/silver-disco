@@ -99,6 +99,53 @@ export const fetchMockConfig: TFetchMockConfig = {
 
         return response200Creating();
     },
+    '/api/auth/sign-up/passkey/request': async (init) => {
+        console.log('# ?:', init);
+        const body = await bodyParsing(init);
+        const displayName = get(body, 'displayName');
+        const name = get(body, 'email');
+
+        return new Response(
+            JSON.stringify({
+                rpId: 'localhost',
+                challenge: convertArrayBufferToBase64(
+                    crypto.getRandomValues(new Uint8Array(32))
+                ),
+                rp: {
+                    name: 'rp-name',
+                    id: 'localhost',
+                },
+                user: {
+                    id: convertArrayBufferToBase64(
+                        crypto.getRandomValues(new Uint8Array(32))
+                    ),
+                    displayName,
+                    name,
+                },
+                pubKeyCredParams: [
+                    {
+                        alg: -7,
+                        type: 'public-key',
+                    },
+                    {
+                        alg: -257,
+                        type: 'public-key',
+                    },
+                ],
+                attestation: 'direct',
+                excludeCredentials: [],
+                authenticatorSelection: {
+                    residentKey: 'required',
+                    userVerification: 'preferred',
+                    requireResidentKey: true,
+                },
+                extensions: {
+                    credProps: true,
+                },
+            }),
+            { status: 200 }
+        );
+    },
     '/api/auth/passkey/request': async () =>
         new Response(
             JSON.stringify({
