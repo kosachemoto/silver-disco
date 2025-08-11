@@ -100,47 +100,48 @@ export const fetchMockConfig: TFetchMockConfig = {
         return response200Creating();
     },
     '/api/auth/sign-up/passkey/request': async (init) => {
-        console.log('# ?:', init);
         const body = await bodyParsing(init);
         const displayName = get(body, 'displayName');
         const name = get(body, 'email');
 
         return new Response(
             JSON.stringify({
-                rpId: window.location.hostname,
-                challenge: convertArrayBufferToBase64(
-                    crypto.getRandomValues(new Uint8Array(32))
-                ),
-                rp: {
-                    name: 'rp-name',
-                    id: window.location.hostname,
-                },
-                user: {
-                    id: convertArrayBufferToBase64(
+                publicKey: {
+                    rpId: window.location.hostname,
+                    challenge: convertArrayBufferToBase64(
                         crypto.getRandomValues(new Uint8Array(32))
                     ),
-                    displayName,
-                    name,
-                },
-                pubKeyCredParams: [
-                    {
-                        alg: -7,
-                        type: 'public-key',
+                    rp: {
+                        name: 'rp-name',
+                        id: window.location.hostname,
                     },
-                    {
-                        alg: -257,
-                        type: 'public-key',
+                    user: {
+                        id: convertArrayBufferToBase64(
+                            crypto.getRandomValues(new Uint8Array(32))
+                        ),
+                        displayName,
+                        name,
                     },
-                ],
-                attestation: 'direct',
-                excludeCredentials: [],
-                authenticatorSelection: {
-                    residentKey: 'required',
-                    userVerification: 'preferred',
-                    requireResidentKey: true,
-                },
-                extensions: {
-                    credProps: true,
+                    pubKeyCredParams: [
+                        {
+                            alg: -7,
+                            type: 'public-key',
+                        },
+                        {
+                            alg: -257,
+                            type: 'public-key',
+                        },
+                    ],
+                    attestation: 'direct',
+                    excludeCredentials: [],
+                    authenticatorSelection: {
+                        residentKey: 'required',
+                        userVerification: 'preferred',
+                        requireResidentKey: true,
+                    },
+                    extensions: {
+                        credProps: true,
+                    },
                 },
             }),
             { status: 200 }
