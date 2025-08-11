@@ -40,6 +40,11 @@ export const AuthSignUp: React.FC = () => {
                 defaultValues={{ email }}
                 isLoading={authCodeRequestMutation.isPending}
             />
+            <List>
+                <List.Item>
+                    <Link to="/auth/sign-up-passkey">Sing Up with passkey</Link>
+                </List.Item>
+            </List>
             <Divider>already have an account?</Divider>
             <List>
                 <List.Item>
