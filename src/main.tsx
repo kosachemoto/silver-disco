@@ -9,6 +9,7 @@ import { AuthSignInPassword } from '@/pages/auth/ui/auth-sign-in-password';
 import { AuthSignInVerify } from '@/pages/auth/ui/auth-sign-in-verify';
 import { AuthSuccess } from '@/pages/auth/ui/auth-success';
 import { AuthSignUp } from '@/pages/auth/ui/sign-up';
+import { AuthSignUpPasskey } from '@/pages/auth/ui/sign-up-passkey';
 
 import { fetchMockSetUp } from '@/entities/fetch/mock/utils';
 
@@ -46,6 +47,10 @@ createRoot(document.getElementById('root')!).render(
                         </Route>
                         <Route path="success" element={<AuthSuccess />} />
                         <Route path="sign-up" element={<AuthSignUp />} />
+                        <Route
+                            path="sign-up-passkey"
+                            element={<AuthSignUpPasskey />}
+                        />
                     </Route>
                     <Route path="*" element={<Navigate to="/auth" replace />} />
                 </Routes>

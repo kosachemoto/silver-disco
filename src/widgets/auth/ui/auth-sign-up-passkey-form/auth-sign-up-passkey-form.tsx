@@ -17,6 +17,7 @@ type TProps = {
     onSubmit?: SubmitHandler<TAuthSignUpPasskey>;
     onError?: SubmitHandler<TAuthSignUpPasskey>;
     defaultValues?: DefaultValues<TAuthSignUpPasskey>;
+    propsButton?: React.ComponentProps<typeof Button>;
     isLoading?: boolean;
 };
 
@@ -24,6 +25,9 @@ export const AuthSignUpPasskeyForm: React.FC<TProps> = ({
     onSubmit = noop,
     onError = noop,
     defaultValues,
+    propsButton = {
+        children: 'Continue with Passkey',
+    },
     isLoading,
 }) => {
     const { register, formState, handleSubmit } = useForm<TAuthSignUpPasskey>({
@@ -49,9 +53,12 @@ export const AuthSignUpPasskeyForm: React.FC<TProps> = ({
                 title="Email"
                 error={formState.errors.email?.message}
             />
-            <Button type="submit" isLoading={isLoading} disabled={isLoading}>
-                Continue
-            </Button>
+            <Button
+                type="submit"
+                isLoading={isLoading}
+                disabled={isLoading}
+                {...propsButton}
+            />
         </form>
     );
 };
