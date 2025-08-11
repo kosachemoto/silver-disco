@@ -2,10 +2,11 @@ import { createRoute } from './create-route';
 
 export const routes = createRoute('/silver-disco', {
     auth: {
-        'sign-up': {},
+        'sign-up': {
+            verification: {},
+        },
         'sign-in': {
-            code: {},
-            'code-verification': {},
+            verification: {},
             password: {},
         },
         'sign-up-passkey': {},

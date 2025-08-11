@@ -39,7 +39,7 @@ export const AuthSignIn: React.FC = () => {
     const authCodeRequest = (data: TAuthSignInCodeRequest) => {
         authCodeRequestMutation.mutate(data, {
             onSuccess: () => {
-                navigate(routes.auth['sign-in']['code-verification'].path, {
+                navigate(routes.auth['sign-in']['verification'].path, {
                     state: { email: data.email },
                 });
             },

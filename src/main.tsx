@@ -42,21 +42,12 @@ createRoot(document.getElementById('root')!).render(
                         <Route path={routes.auth['sign-in'].path}>
                             <Route
                                 index
-                                element={
-                                    <Navigate
-                                        to={routes.auth['sign-in'].code.path}
-                                        replace
-                                    />
-                                }
-                            />
-                            <Route
-                                path={routes.auth['sign-in'].code.path}
+                                path={routes.auth['sign-in'].path}
                                 element={<AuthSignIn />}
                             />
                             <Route
                                 path={
-                                    routes.auth['sign-in']['code-verification']
-                                        .path
+                                    routes.auth['sign-in']['verification'].path
                                 }
                                 element={<AuthSignInVerify />}
                             />
@@ -69,10 +60,19 @@ createRoot(document.getElementById('root')!).render(
                             path={routes.auth['success'].path}
                             element={<AuthSuccess />}
                         />
-                        <Route
-                            path={routes.auth['sign-up'].path}
-                            element={<AuthSignUp />}
-                        />
+                        <Route path={routes.auth['sign-up'].path}>
+                            <Route
+                                index
+                                path={routes.auth['sign-up'].path}
+                                element={<AuthSignUp />}
+                            />
+                            <Route
+                                path={
+                                    routes.auth['sign-up']['verification'].path
+                                }
+                                element={<AuthSignInVerify />}
+                            />
+                        </Route>
                         <Route
                             path={routes.auth['sign-up-passkey'].path}
                             element={<AuthSignUpPasskey />}

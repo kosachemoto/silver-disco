@@ -24,7 +24,7 @@ export const AuthSignUp: React.FC = () => {
     const authCodeRequest = (data: TAuthSignUp) => {
         authCodeRequestMutation.mutate(data, {
             onSuccess: () => {
-                navigate(routes.auth['sign-in']['code-verification'].path);
+                navigate(routes.auth['sign-in']['verification'].path);
             },
             onError: (error) => unshift(convertApiErrorToProps(error)),
         });
@@ -41,7 +41,7 @@ export const AuthSignUp: React.FC = () => {
             />
             <List>
                 <List.Item>
-                    <Link to={routes['auth']['sign-up-passkey'].path}>
+                    <Link to={routes['auth']['sign-in']['verification'].path}>
                         Sing Up with passkey
                     </Link>
                 </List.Item>
