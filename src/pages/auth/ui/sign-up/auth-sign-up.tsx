@@ -24,7 +24,9 @@ export const AuthSignUp: React.FC = () => {
     const authCodeRequest = (data: TAuthSignUp) => {
         authCodeRequestMutation.mutate(data, {
             onSuccess: () => {
-                navigate(routes.auth['sign-in']['verification'].path);
+                navigate(routes.auth['sign-in']['verification'].path, {
+                    state: { email: data.email },
+                });
             },
             onError: (error) => unshift(convertApiErrorToProps(error)),
         });
