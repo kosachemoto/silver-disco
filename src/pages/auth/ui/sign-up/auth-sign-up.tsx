@@ -14,6 +14,7 @@ import { List } from '@/shared/ui/list';
 import { convertApiErrorToProps } from '@/shared/utils/alert';
 
 import type { TAuthSignUp } from '@/entities/auth/types';
+import { routes } from '@/entities/routes/utils';
 
 export const AuthSignUp: React.FC = () => {
     const { email } = useAuthCodeRouteState();
@@ -23,9 +24,7 @@ export const AuthSignUp: React.FC = () => {
     const authCodeRequest = (data: TAuthSignUp) => {
         authCodeRequestMutation.mutate(data, {
             onSuccess: () => {
-                navigate('/auth/sign-in/code-verification', {
-                    state: { email: data.email },
-                });
+                navigate(routes.auth['sign-in']['code-verification'].path);
             },
             onError: (error) => unshift(convertApiErrorToProps(error)),
         });
@@ -42,16 +41,22 @@ export const AuthSignUp: React.FC = () => {
             />
             <List>
                 <List.Item>
-                    <Link to="/auth/sign-up-passkey">Sing Up with passkey</Link>
+                    <Link to={routes['auth']['sign-up-passkey'].path}>
+                        Sing Up with passkey
+                    </Link>
                 </List.Item>
             </List>
             <Divider>already have an account?</Divider>
             <List>
                 <List.Item>
-                    <Link to="/auth/sing-in">Sign In with Email</Link>
+                    <Link to={routes['auth']['sign-in'].path}>
+                        Sign In with Email
+                    </Link>
                 </List.Item>
                 <List.Item>
-                    <Link to="/auth/sign-in/password">Or Password</Link>
+                    <Link to={routes['auth']['sign-in'].password.path}>
+                        Or Password
+                    </Link>
                 </List.Item>
             </List>
         </>

@@ -15,6 +15,7 @@ import { List } from '@/shared/ui/list';
 import { convertApiErrorToProps } from '@/shared/utils/alert';
 
 import type { TAuthSignUpPasskey } from '@/entities/auth/types';
+import { routes } from '@/entities/routes/utils';
 
 export const AuthSignUpPasskey: React.FC = () => {
     const {
@@ -32,7 +33,7 @@ export const AuthSignUpPasskey: React.FC = () => {
         authSignUpPasskeyMutation.mutate(data, {
             onSuccess: () => {
                 onSuccess();
-                navigate('/auth/success');
+                navigate(routes.auth.success.path);
             },
             onError: (error) => {
                 onError();
@@ -53,16 +54,22 @@ export const AuthSignUpPasskey: React.FC = () => {
             />
             <List>
                 <List.Item>
-                    <Link to="/auth/sign-up">Sing Up with email</Link>
+                    <Link to={routes.auth['sign-up'].path}>
+                        Sing Up with email
+                    </Link>
                 </List.Item>
             </List>
             <Divider>already have an account?</Divider>
             <List>
                 <List.Item>
-                    <Link to="/auth/sing-in">Sign In with Email</Link>
+                    <Link to={routes.auth['sign-in'].path}>
+                        Sign In with Email
+                    </Link>
                 </List.Item>
                 <List.Item>
-                    <Link to="/auth/sign-in/password">Or Password</Link>
+                    <Link to={routes.auth['sign-in'].password.path}>
+                        Or Password
+                    </Link>
                 </List.Item>
             </List>
         </>

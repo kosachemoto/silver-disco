@@ -16,6 +16,7 @@ import { Link } from '@/shared/ui/link';
 import { convertApiErrorToProps } from '@/shared/utils/alert';
 
 import type { TAuthSignInCodeVerify } from '@/entities/auth/types';
+import { routes } from '@/entities/routes/utils';
 
 export const AuthSignInVerify: React.FC = () => {
     const navigate = useNavigate();
@@ -31,7 +32,7 @@ export const AuthSignInVerify: React.FC = () => {
                 <h1>Verification</h1>
                 <Alert>Unexpected error</Alert>
                 <div>
-                    <Link to="/auth">Get back to login</Link>
+                    <Link to={routes['auth'].path}>Get back to login</Link>
                 </div>
             </>
         );
@@ -40,7 +41,7 @@ export const AuthSignInVerify: React.FC = () => {
     const authCodeVerify = (data: TAuthSignInCodeVerify) => {
         mutationVerify.mutate(data, {
             onSuccess: () => {
-                navigate('/auth/success');
+                navigate(routes.auth.success.path);
             },
             onError: (error) => {
                 unshift(convertApiErrorToProps(error));
@@ -59,7 +60,11 @@ export const AuthSignInVerify: React.FC = () => {
             <h1>Verification</h1>
             {queue.map(Alert)}
             {email && (
-                <EmailLink email={email} to="/auth/sign-in" state={{ email }} />
+                <EmailLink
+                    email={email}
+                    to={routes['auth']['sign-in'].path}
+                    state={{ email }}
+                />
             )}
             <p>Enter the code sent to your email</p>
             <AuthSignInVerifyForm

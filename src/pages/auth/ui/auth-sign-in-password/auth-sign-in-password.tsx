@@ -18,6 +18,7 @@ import { convertApiErrorToProps } from '@/shared/utils/alert';
 
 import type { ApiError } from '@/entities/api-error/utils';
 import type { TAuthSignInPassword } from '@/entities/auth/types';
+import { routes } from '@/entities/routes/utils';
 
 export const AuthSignInPassword: React.FC = () => {
     const {
@@ -39,7 +40,7 @@ export const AuthSignInPassword: React.FC = () => {
         authPasskeyMutation.mutate(undefined, {
             onSuccess: () => {
                 onSuccess();
-                navigate('/auth/success');
+                navigate(routes.auth.success.path);
             },
             onError: (err) => {
                 onError();
@@ -50,7 +51,7 @@ export const AuthSignInPassword: React.FC = () => {
 
     const authLogin = (data: TAuthSignInPassword) => {
         authLoginMutation.mutate(data, {
-            onSuccess: () => navigate('/auth/success'),
+            onSuccess: () => navigate(routes.auth.success.path),
             onError: unshiftApiErorr,
         });
     };
@@ -71,10 +72,12 @@ export const AuthSignInPassword: React.FC = () => {
             />
             <List>
                 <List.Item>
-                    <Link to="/auth/sign-up">Sing Up</Link>
+                    <Link to={routes.auth['sign-up'].path}>Sing Up</Link>
                 </List.Item>
                 <List.Item>
-                    <Link to="/auth/sign-in">Sign In with email</Link>
+                    <Link to={routes.auth['sign-in'].path}>
+                        Sign In with email
+                    </Link>
                 </List.Item>
             </List>
         </>

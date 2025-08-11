@@ -12,6 +12,7 @@ import { AuthSignUp } from '@/pages/auth/ui/sign-up';
 import { AuthSignUpPasskey } from '@/pages/auth/ui/sign-up-passkey';
 
 import { fetchMockSetUp } from '@/entities/fetch/mock/utils';
+import { routes } from '@/entities/routes/utils';
 
 import './global.css';
 
@@ -24,35 +25,63 @@ createRoot(document.getElementById('root')!).render(
         <QueryClientProvider client={queryClient}>
             <BrowserRouter>
                 <Routes>
-                    <Route index element={<Navigate to="/auth" replace />} />
-                    <Route path="auth" element={<AuthLayout />}>
+                    <Route
+                        index
+                        element={<Navigate to={routes.auth.path} replace />}
+                    />
+                    <Route path={routes.auth.path} element={<AuthLayout />}>
                         <Route
                             index
-                            element={<Navigate to="sign-in" replace />}
+                            element={
+                                <Navigate
+                                    to={routes.auth['sign-in'].path}
+                                    replace
+                                />
+                            }
                         />
-                        <Route path="sign-in">
+                        <Route path={routes.auth['sign-in'].path}>
                             <Route
                                 index
-                                element={<Navigate to="code" replace />}
+                                element={
+                                    <Navigate
+                                        to={routes.auth['sign-in'].code.path}
+                                        replace
+                                    />
+                                }
                             />
-                            <Route path="code" element={<AuthSignIn />} />
                             <Route
-                                path="code-verification"
+                                path={routes.auth['sign-in'].code.path}
+                                element={<AuthSignIn />}
+                            />
+                            <Route
+                                path={
+                                    routes.auth['sign-in']['code-verification']
+                                        .path
+                                }
                                 element={<AuthSignInVerify />}
                             />
                             <Route
-                                path="password"
+                                path={routes.auth['sign-in']['password'].path}
                                 element={<AuthSignInPassword />}
                             />
                         </Route>
-                        <Route path="success" element={<AuthSuccess />} />
-                        <Route path="sign-up" element={<AuthSignUp />} />
                         <Route
-                            path="sign-up-passkey"
+                            path={routes.auth['success'].path}
+                            element={<AuthSuccess />}
+                        />
+                        <Route
+                            path={routes.auth['sign-up'].path}
+                            element={<AuthSignUp />}
+                        />
+                        <Route
+                            path={routes.auth['sign-up-passkey'].path}
                             element={<AuthSignUpPasskey />}
                         />
                     </Route>
-                    <Route path="*" element={<Navigate to="/auth" replace />} />
+                    <Route
+                        path="*"
+                        element={<Navigate to={routes['auth'].path} replace />}
+                    />
                 </Routes>
             </BrowserRouter>
         </QueryClientProvider>
