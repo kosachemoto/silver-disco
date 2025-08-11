@@ -34,6 +34,7 @@ export const AuthSignUpForm: React.FC<TProps> = ({
             <Email
                 {...register('email')}
                 autoFocus
+                autoComplete="email"
                 title="Email"
                 error={formState.errors.email?.message}
             />
