@@ -2,5 +2,6 @@
 
 !/src
 !/src/**
+!vite.config.ts
 
 /*.md
