@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
+import { useLocation } from 'react-router';
 
 import { useAuthCodeRouteState } from '@/pages/auth/hooks';
 
@@ -17,6 +18,7 @@ import type { TAuthSignUp } from '@/entities/auth/types';
 import { routes } from '@/entities/routes/utils';
 
 export const AuthSignUp: React.FC = () => {
+    const location = useLocation();
     const { email } = useAuthCodeRouteState();
     const { queue, unshift } = useAlertManager();
     const navigate = useNavigate();
@@ -24,8 +26,8 @@ export const AuthSignUp: React.FC = () => {
     const authCodeRequest = (data: TAuthSignUp) => {
         authCodeRequestMutation.mutate(data, {
             onSuccess: () => {
-                navigate(routes.auth['sign-in']['verification'].path, {
-                    state: { email: data.email },
+                navigate(routes.auth['sign-up']['verification'].path, {
+                    state: { email: data.email, from: location.pathname },
                 });
             },
             onError: (error) => unshift(convertApiErrorToProps(error)),
@@ -43,7 +45,7 @@ export const AuthSignUp: React.FC = () => {
             />
             <List>
                 <List.Item>
-                    <Link to={routes['auth']['sign-in']['verification'].path}>
+                    <Link to={routes['auth']['sign-up-passkey'].path}>
                         Sing Up with passkey
                     </Link>
                 </List.Item>

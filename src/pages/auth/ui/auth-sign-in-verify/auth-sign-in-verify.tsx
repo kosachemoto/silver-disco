@@ -21,8 +21,7 @@ import { routes } from '@/entities/routes/utils';
 export const AuthSignInVerify: React.FC = () => {
     const navigate = useNavigate();
     const { queue, unshift } = useAlertManager();
-    const data = useAuthCodeRouteState();
-    const { email } = data;
+    const { email, from } = useAuthCodeRouteState();
     const mutationVerify = useAuthSignInCodeVerifyMutation();
     const mutationResend = useAuthSignInCodeResendMutation();
 
@@ -31,9 +30,7 @@ export const AuthSignInVerify: React.FC = () => {
             <>
                 <h1>Verification</h1>
                 <Alert>Unexpected error</Alert>
-                <div>
-                    <Link to={routes['auth'].path}>Get back to login</Link>
-                </div>
+                <div>{from && <Link to={from}>Get back</Link>}</div>
             </>
         );
     }
@@ -59,12 +56,8 @@ export const AuthSignInVerify: React.FC = () => {
         <>
             <h1>Verification</h1>
             {queue.map(Alert)}
-            {email && (
-                <EmailLink
-                    email={email}
-                    to={routes['auth']['sign-in'].path}
-                    state={{ email }}
-                />
+            {email && from && (
+                <EmailLink email={email} to={from} state={{ email }} />
             )}
             <p>Enter the code sent to your email</p>
             <AuthSignInVerifyForm

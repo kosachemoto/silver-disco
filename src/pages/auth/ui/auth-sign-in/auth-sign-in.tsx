@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
+import { useLocation } from 'react-router';
 
 import { useAuthPasskeyButton } from '@/pages/auth/hooks';
 import { useAuthCodeRouteState } from '@/pages/auth/hooks';
@@ -21,6 +22,7 @@ import type { TAuthSignInCodeRequest } from '@/entities/auth/types';
 import { routes } from '@/entities/routes/utils';
 
 export const AuthSignIn: React.FC = () => {
+    const location = useLocation();
     const { email } = useAuthCodeRouteState();
     const {
         props: propsButton,
@@ -40,7 +42,7 @@ export const AuthSignIn: React.FC = () => {
         authCodeRequestMutation.mutate(data, {
             onSuccess: () => {
                 navigate(routes.auth['sign-in']['verification'].path, {
-                    state: { email: data.email },
+                    state: { email: data.email, from: location.pathname },
                 });
             },
             onError: unshiftApiErorr,
