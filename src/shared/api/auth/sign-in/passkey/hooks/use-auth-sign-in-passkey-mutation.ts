@@ -1,11 +1,8 @@
+import { get } from '@github/webauthn-json';
 import { useMutation } from '@tanstack/react-query';
 
-import {
-    authSignInPasskeyRequestDecoding,
-    authSignInPasskeyRequestFetching,
-} from '@/shared/api/auth/sign-in/passkey/request/utils';
+import { authSignInPasskeyRequestFetching } from '@/shared/api/auth/sign-in/passkey/request/utils';
 import { authSignInPasskeyVerifyFetching } from '@/shared/api/auth/sign-in/passkey/verify/utils';
-import { navigatorCredentialsGetting } from '@/shared/api/navigator/credentials/utils';
 
 import { apiErrorHandling } from '@/entities/api-error/utils';
 
@@ -14,8 +11,7 @@ export const useAuthSignInPasskeyMutation = () =>
         mutationFn: () =>
             authSignInPasskeyRequestFetching()
                 .then(apiErrorHandling)
-                .then(authSignInPasskeyRequestDecoding)
-                .then(navigatorCredentialsGetting)
+                .then(get)
                 .then(authSignInPasskeyVerifyFetching)
                 .then(apiErrorHandling),
     });
