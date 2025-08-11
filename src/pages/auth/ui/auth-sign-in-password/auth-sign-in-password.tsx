@@ -57,7 +57,7 @@ export const AuthSignInPassword: React.FC = () => {
 
     return (
         <>
-            <h1>Login</h1>
+            <h1>Sing In</h1>
             {queue.map(Alert)}
             <AuthSignInPasswordForm
                 onSubmit={authLogin}
