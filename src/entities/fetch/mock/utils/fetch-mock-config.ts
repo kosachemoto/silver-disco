@@ -150,13 +150,15 @@ export const fetchMockConfig: TFetchMockConfig = {
     '/api/auth/passkey/request': async () =>
         new Response(
             JSON.stringify({
-                rpId: window.location.hostname,
-                challenge: convertArrayBufferToBase64(
-                    crypto.getRandomValues(new Uint8Array(32))
-                ),
-                allowCredentials: [],
-                timeout: 300000,
-                userVerification: 'preferred',
+                publicKey: {
+                    rpId: window.location.hostname,
+                    challenge: convertArrayBufferToBase64(
+                        crypto.getRandomValues(new Uint8Array(32))
+                    ),
+                    allowCredentials: [],
+                    timeout: 300000,
+                    userVerification: 'preferred',
+                },
             }),
             { status: 200 }
         ),
