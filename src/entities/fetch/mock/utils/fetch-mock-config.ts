@@ -107,13 +107,13 @@ export const fetchMockConfig: TFetchMockConfig = {
 
         return new Response(
             JSON.stringify({
-                rpId: 'localhost',
+                rpId: window.location.hostname,
                 challenge: convertArrayBufferToBase64(
                     crypto.getRandomValues(new Uint8Array(32))
                 ),
                 rp: {
                     name: 'rp-name',
-                    id: 'localhost',
+                    id: window.location.hostname,
                 },
                 user: {
                     id: convertArrayBufferToBase64(
@@ -149,7 +149,7 @@ export const fetchMockConfig: TFetchMockConfig = {
     '/api/auth/passkey/request': async () =>
         new Response(
             JSON.stringify({
-                rpId: 'localhost',
+                rpId: window.location.hostname,
                 challenge: convertArrayBufferToBase64(
                     crypto.getRandomValues(new Uint8Array(32))
                 ),
