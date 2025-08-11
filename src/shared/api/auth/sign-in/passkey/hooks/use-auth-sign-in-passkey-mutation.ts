@@ -1,30 +1,21 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { useAuthSignInPasskeyRequestMutation } from '@/shared/api/auth/sign-in/passkey/request/hooks';
-import { useAuthSignInPasskeyVerifyMutation } from '@/shared/api/auth/sign-in/passkey/verify/hooks';
+import {
+    authSignInPasskeyRequestDecoding,
+    authSignInPasskeyRequestFetching,
+} from '@/shared/api/auth/sign-in/passkey/request/utils';
+import { authSignInPasskeyVerifyFetching } from '@/shared/api/auth/sign-in/passkey/verify/utils';
+import { navigatorCredentialsGetting } from '@/shared/api/navigator/credentials/utils';
 
-import { checkIsPublicKeyCredential } from '@/entities/navigator/credentials/utils';
-import { webAuthnErrorHandling } from '@/entities/web-authn-error/utils';
+import { apiErrorHandling } from '@/entities/api-error/utils';
 
-export const useAuthSignInPasskeyMutation = () => {
-    const authPasskeyRequestMutation = useAuthSignInPasskeyRequestMutation();
-    const authPasskeyVerifyMutation = useAuthSignInPasskeyVerifyMutation();
-
-    return useMutation({
+export const useAuthSignInPasskeyMutation = () =>
+    useMutation({
         mutationFn: () =>
-            authPasskeyRequestMutation
-                .mutateAsync()
-                .then((publicKey) => navigator.credentials.get({ publicKey }))
-                .catch(webAuthnErrorHandling)
-                .then((credential) => {
-                    if (!checkIsPublicKeyCredential(credential)) {
-                        throw new Error('Invalid credential');
-                    }
-
-                    return credential;
-                })
-                .then((credential) =>
-                    authPasskeyVerifyMutation.mutateAsync(credential)
-                ),
+            authSignInPasskeyRequestFetching()
+                .then(apiErrorHandling)
+                .then(authSignInPasskeyRequestDecoding)
+                .then(navigatorCredentialsGetting)
+                .then(authSignInPasskeyVerifyFetching)
+                .then(apiErrorHandling),
     });
-};
