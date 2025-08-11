@@ -29,5 +29,6 @@ export default defineConfig({
         return `${block}--${hash}`;
       }
     }
-  }
+  },
+  base: 'silver-disco'
 });
