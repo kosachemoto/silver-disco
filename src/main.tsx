@@ -19,6 +19,7 @@ import { AuthSignInVerify } from '@/pages/auth/ui/auth-sign-in-verify';
 import { AuthSuccess } from '@/pages/auth/ui/auth-success';
 import { AuthSignUp } from '@/pages/auth/ui/sign-up';
 import { AuthSignUpPasskey } from '@/pages/auth/ui/sign-up-passkey';
+import { AuthSignUpPassword } from '@/pages/auth/ui/sign-up-password';
 
 import { fetchMockSetUp } from '@/entities/fetch/mock/utils';
 
@@ -79,6 +80,12 @@ const signUpPasskeyRoute = createRoute({
     component: AuthSignUpPasskey,
 });
 
+const signUpPasswordRoute = createRoute({
+    getParentRoute: () => authRoute,
+    path: '/sign-up/password',
+    component: AuthSignUpPassword,
+});
+
 const successRoute = createRoute({
     getParentRoute: () => authRoute,
     path: '/success',
@@ -120,6 +127,7 @@ const routeTree = rootRoute.addChildren([
         signUpRoute,
         signUpVerificationRoute,
         signUpPasskeyRoute,
+        signUpPasswordRoute,
         signInRoute,
         signInVerificationRoute,
         signInPasswordRoute,
