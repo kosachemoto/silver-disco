@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { TProps } from '@/shared/ui/button';
 
-type TButtonStatus = 'idle' | 'pending' | 'verifying' | 'resolved' | 'rejected';
+type TButtonStatus = 'pending' | 'verifying' | 'resolved' | 'rejected';
 
 type TOptions = {
     [key in TButtonStatus]?: TProps;
@@ -13,16 +13,12 @@ export const useButtonAsync = (
     options: TOptions = {}
 ) => {
     const {
-        idle = {},
         pending = {},
         verifying = {},
         resolved = {},
         rejected = {},
     } = options;
-    const [props, setProps] = React.useState<TProps>({
-        ...defaultProps,
-        ...idle,
-    });
+    const [props, setProps] = React.useState<TProps>(defaultProps);
     const patch = (...args: TProps[]) =>
         setProps((props) => Object.assign({}, props, ...args));
 
