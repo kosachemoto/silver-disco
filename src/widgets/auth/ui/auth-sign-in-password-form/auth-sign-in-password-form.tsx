@@ -8,7 +8,7 @@ import { Email } from '@/features/email/ui';
 import { Password } from '@/features/password/ui';
 
 import { Button } from '@/shared/ui/button';
-import type { TProps as TButtonProps } from '@/shared/ui/button';
+import type { TProps as TPropsButton } from '@/shared/ui/button';
 import { Checkbox } from '@/shared/ui/checkbox';
 
 import type { TAuthSignInPassword } from '@/entities/auth/types';
@@ -17,7 +17,7 @@ import { authSignInPasswordSchema } from '@/entities/auth/utils';
 type TProps = {
     onSubmit?: SubmitHandler<TAuthSignInPassword>;
     onError?: SubmitErrorHandler<Error>;
-    propsButton?: TButtonProps;
+    propsButton?: TPropsButton;
     isLoading?: boolean;
 };
 

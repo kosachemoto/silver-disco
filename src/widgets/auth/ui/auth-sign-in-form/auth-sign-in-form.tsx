@@ -7,7 +7,7 @@ import type { DefaultValues, SubmitHandler } from 'react-hook-form';
 import { Email } from '@/features/email/ui';
 
 import { Button } from '@/shared/ui/button';
-import type { TProps as TButtonProps } from '@/shared/ui/button';
+import type { TProps as TPropsButton } from '@/shared/ui/button';
 import { Checkbox } from '@/shared/ui/checkbox';
 
 import type { TAuthSignInCodeRequest } from '@/entities/auth/types';
@@ -17,7 +17,7 @@ type TProps = {
     onSubmit?: SubmitHandler<TAuthSignInCodeRequest>;
     onError?: SubmitHandler<TAuthSignInCodeRequest>;
     defaultValues?: DefaultValues<TAuthSignInCodeRequest>;
-    propsButton?: TButtonProps;
+    propsButton?: TPropsButton;
     isLoading?: boolean;
 };
 
