@@ -7,6 +7,7 @@ import type { DefaultValues, SubmitHandler } from 'react-hook-form';
 import { Email } from '@/features/email/ui';
 
 import { Button } from '@/shared/ui/button';
+import type { TProps as TPropsButton } from '@/shared/ui/button';
 
 import type { TAuthSignUp } from '@/entities/auth/types';
 import { authSignUpSchema } from '@/entities/auth/utils';
@@ -15,6 +16,7 @@ type TProps = {
     onSubmit?: SubmitHandler<TAuthSignUp>;
     onError?: SubmitHandler<TAuthSignUp>;
     defaultValues?: DefaultValues<TAuthSignUp>;
+    propsButton?: TPropsButton;
     isLoading?: boolean;
 };
 
@@ -22,6 +24,7 @@ export const AuthSignUpForm: React.FC<TProps> = ({
     onSubmit = noop,
     onError = noop,
     defaultValues,
+    propsButton,
     isLoading,
 }) => {
     const { register, formState, handleSubmit } = useForm<TAuthSignUp>({
@@ -38,9 +41,12 @@ export const AuthSignUpForm: React.FC<TProps> = ({
                 title="Email"
                 error={formState.errors.email?.message}
             />
-            <Button type="submit" isLoading={isLoading} disabled={isLoading}>
-                Continue
-            </Button>
+            <Button
+                type="submit"
+                isLoading={isLoading}
+                disabled={isLoading}
+                {...propsButton}
+            />
         </form>
     );
 };

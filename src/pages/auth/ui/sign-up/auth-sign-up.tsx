@@ -1,7 +1,10 @@
 import { useLocation, useRouter } from '@tanstack/react-router';
 import React from 'react';
 
-import { useAuthSignInPasskeyButton } from '@/pages/auth/hooks';
+import {
+    useAuthContinueButton,
+    useAuthSignInPasskeyButton,
+} from '@/pages/auth/hooks';
 
 import { AuthSignUpForm } from '@/widgets/auth/ui/auth-sign-up-form';
 
@@ -27,9 +30,13 @@ export const AuthSignUp: React.FC = () => {
         unshift(convertApiErrorToProps(error));
     };
 
+    const { props: propsButtonContinue, ...optionsButtonContinue } =
+        useAuthContinueButton();
     const { props: propsButtonPasskey, ...optionsButtonPasskey } =
         useAuthSignInPasskeyButton();
-    const authCodeRequestMutation = useAuthSignInCodeRequestMutation();
+    const authCodeRequestMutation = useAuthSignInCodeRequestMutation(
+        optionsButtonContinue
+    );
     const authCodeRequest = (data: TAuthSignUp) => {
         authCodeRequestMutation.mutate(data, {
             onSuccess: () => {
@@ -60,6 +67,7 @@ export const AuthSignUp: React.FC = () => {
             <AuthSignUpForm
                 onSubmit={authCodeRequest}
                 defaultValues={{ email }}
+                propsButton={propsButtonContinue}
                 isLoading={authCodeRequestMutation.isPending}
             />
             <List>
