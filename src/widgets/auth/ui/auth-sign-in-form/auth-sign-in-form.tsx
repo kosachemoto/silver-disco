@@ -7,6 +7,7 @@ import type { DefaultValues, SubmitHandler } from 'react-hook-form';
 import { Email } from '@/features/email/ui';
 
 import { Button } from '@/shared/ui/button';
+import type { TProps as TButtonProps } from '@/shared/ui/button';
 import { Checkbox } from '@/shared/ui/checkbox';
 
 import type { TAuthSignInCodeRequest } from '@/entities/auth/types';
@@ -16,6 +17,7 @@ type TProps = {
     onSubmit?: SubmitHandler<TAuthSignInCodeRequest>;
     onError?: SubmitHandler<TAuthSignInCodeRequest>;
     defaultValues?: DefaultValues<TAuthSignInCodeRequest>;
+    propsButton?: TButtonProps;
     isLoading?: boolean;
 };
 
@@ -23,6 +25,7 @@ export const AuthSignInForm: React.FC<TProps> = ({
     onSubmit = noop,
     onError = noop,
     defaultValues,
+    propsButton,
     isLoading,
 }) => {
     const { register, formState, handleSubmit } =
@@ -41,9 +44,12 @@ export const AuthSignInForm: React.FC<TProps> = ({
                 error={formState.errors.email?.message}
             />
             <Checkbox {...register('remember')}>Remember me</Checkbox>
-            <Button type="submit" isLoading={isLoading} disabled={isLoading}>
-                Continue
-            </Button>
+            <Button
+                type="submit"
+                isLoading={isLoading}
+                disabled={isLoading}
+                {...propsButton}
+            />
         </form>
     );
 };

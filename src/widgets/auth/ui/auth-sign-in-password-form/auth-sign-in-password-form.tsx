@@ -8,6 +8,7 @@ import { Email } from '@/features/email/ui';
 import { Password } from '@/features/password/ui';
 
 import { Button } from '@/shared/ui/button';
+import type { TProps as TButtonProps } from '@/shared/ui/button';
 import { Checkbox } from '@/shared/ui/checkbox';
 
 import type { TAuthSignInPassword } from '@/entities/auth/types';
@@ -16,12 +17,14 @@ import { authSignInPasswordSchema } from '@/entities/auth/utils';
 type TProps = {
     onSubmit?: SubmitHandler<TAuthSignInPassword>;
     onError?: SubmitErrorHandler<Error>;
+    propsButton?: TButtonProps;
     isLoading?: boolean;
 };
 
 export const AuthSignInPasswordForm: React.FC<TProps> = ({
     onSubmit = noop,
     onError = noop,
+    propsButton,
     isLoading,
 }) => {
     const { register, formState, handleSubmit } = useForm({
@@ -44,9 +47,12 @@ export const AuthSignInPasswordForm: React.FC<TProps> = ({
                 error={formState.errors.password?.message}
             />
             <Checkbox {...register('remember')}>Remember me</Checkbox>
-            <Button type="submit" isLoading={isLoading} disabled={isLoading}>
-                Sign In
-            </Button>
+            <Button
+                type="submit"
+                isLoading={isLoading}
+                disabled={isLoading}
+                {...propsButton}
+            />
         </form>
     );
 };

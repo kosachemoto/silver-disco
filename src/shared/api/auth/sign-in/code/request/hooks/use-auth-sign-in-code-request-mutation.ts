@@ -6,9 +6,21 @@ import type { ApiError } from '@/entities/api-error/utils';
 import { apiErrorHandling } from '@/entities/api-error/utils';
 import type { TAuthSignInCodeRequest } from '@/entities/auth/types';
 
-export const useAuthSignInCodeRequestMutation = () =>
+type TOptions = {
+    onPending?: () => void;
+    onSuccess?: () => void;
+    onError?: () => void;
+};
+
+export const useAuthSignInCodeRequestMutation = ({
+    onPending,
+    onSuccess,
+    onError,
+}: TOptions = {}) =>
     useMutation<unknown, ApiError, TAuthSignInCodeRequest>({
-        retry: false,
+        onMutate: onPending,
+        onSuccess,
+        onError,
         mutationFn: (variables) =>
             authCodeSignInRequestFetching(variables).then(apiErrorHandling),
     });

@@ -44,7 +44,6 @@ export const useButtonAsync = (
 
     return {
         props,
-        setProps,
         onPending,
         onVerifying,
         onSuccess,

@@ -2,7 +2,10 @@ import { useLocation, useRouter } from '@tanstack/react-router';
 import { Outlet } from '@tanstack/react-router';
 import React from 'react';
 
-import { useAuthSignInPasskeyButton } from '@/pages/auth/hooks';
+import {
+    useAuthContinueButton,
+    useAuthSignInPasskeyButton,
+} from '@/pages/auth/hooks';
 
 import { AuthSignInForm } from '@/widgets/auth/ui/auth-sign-in-form';
 
@@ -23,21 +26,16 @@ export const AuthSignIn: React.FC = () => {
     const router = useRouter();
     const location = useLocation();
     const { email } = location.state;
-    const {
-        props: propsButton,
-        onPending,
-        onVerifying,
-        onSuccess,
-        onError,
-    } = useAuthSignInPasskeyButton();
+    const { props: propsButtonContinue, ...optionsButtonContinue } =
+        useAuthContinueButton();
+    const { props: propsButtonPasskey, ...optionsButtonPasskey } =
+        useAuthSignInPasskeyButton();
     const { queue, unshift } = useAlertManager({ variant: 'error' });
-    const authCodeRequestMutation = useAuthSignInCodeRequestMutation();
-    const authPasskeyMutation = useAuthSignInPasskeyMutation({
-        onPending,
-        onVerifying,
-        onSuccess,
-        onError,
-    });
+    const authCodeRequestMutation = useAuthSignInCodeRequestMutation(
+        optionsButtonContinue
+    );
+    const authPasskeyMutation =
+        useAuthSignInPasskeyMutation(optionsButtonPasskey);
     const unshiftApiErorr = (error: ApiError) => {
         unshift(convertApiErrorToProps(error));
     };
@@ -67,13 +65,14 @@ export const AuthSignIn: React.FC = () => {
             <AuthSignInForm
                 onSubmit={authCodeRequest}
                 defaultValues={{ email }}
+                propsButton={propsButtonContinue}
                 isLoading={authCodeRequestMutation.isPending}
             />
             <Divider>or</Divider>
             <Button
                 variant="secondary"
                 onClick={authPasskey}
-                {...propsButton}
+                {...propsButtonPasskey}
             />
             <Outlet />
             <List>

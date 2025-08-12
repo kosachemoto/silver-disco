@@ -1,7 +1,10 @@
 import { useRouter } from '@tanstack/react-router';
 import React from 'react';
 
-import { useAuthSignInPasskeyButton } from '@/pages/auth/hooks';
+import {
+    useAuthContinueButton,
+    useAuthSignInPasskeyButton,
+} from '@/pages/auth/hooks';
 
 import '@/widgets/auth/ui/auth-sign-in-form';
 import { AuthSignInPasswordForm } from '@/widgets/auth/ui/auth-sign-in-password-form';
@@ -21,21 +24,17 @@ import type { TAuthSignInPassword } from '@/entities/auth/types';
 
 export const AuthSignInPassword: React.FC = () => {
     const router = useRouter();
-    const {
-        props: propsButton,
-        onPending,
-        onVerifying,
-        onSuccess,
-        onError,
-    } = useAuthSignInPasskeyButton();
+    const { props: propsContinueButton, ...optionsContinueButton } =
+        useAuthContinueButton();
+    const { props: propsButton, ...optionsSignInPasskeyButton } =
+        useAuthSignInPasskeyButton();
     const { queue, unshift } = useAlertManager({ variant: 'error' });
-    const authLoginMutation = useAuthPasswordVerifyMutation();
-    const authPasskeyMutation = useAuthSignInPasskeyMutation({
-        onPending,
-        onVerifying,
-        onSuccess,
-        onError,
-    });
+    const authLoginMutation = useAuthPasswordVerifyMutation(
+        optionsContinueButton
+    );
+    const authPasskeyMutation = useAuthSignInPasskeyMutation(
+        optionsSignInPasskeyButton
+    );
     const unshiftApiErorr = (error: ApiError) => {
         unshift(convertApiErrorToProps(error));
     };
@@ -59,6 +58,7 @@ export const AuthSignInPassword: React.FC = () => {
             {queue.map(Alert)}
             <AuthSignInPasswordForm
                 onSubmit={authLogin}
+                propsButton={propsContinueButton}
                 isLoading={authLoginMutation.isPending}
             />
             <Divider>or</Divider>
