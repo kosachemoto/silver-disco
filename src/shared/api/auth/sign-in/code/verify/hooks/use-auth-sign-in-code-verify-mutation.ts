@@ -6,9 +6,21 @@ import type { ApiError } from '@/entities/api-error/utils';
 import { apiErrorHandling } from '@/entities/api-error/utils';
 import type { TAuthSignInCodeVerify } from '@/entities/auth/types';
 
-export const useAuthSignInCodeVerifyMutation = () =>
+type TOptions = {
+    onPending?: () => void;
+    onSuccess?: () => void;
+    onError?: () => void;
+};
+
+export const useAuthSignInCodeVerifyMutation = ({
+    onPending: onMutate,
+    onSuccess,
+    onError,
+}: TOptions = {}) =>
     useMutation<unknown, ApiError, TAuthSignInCodeVerify>({
-        retry: false,
+        onMutate,
+        onSuccess,
+        onError,
         mutationFn: (variables) =>
             authSignInCodeVerifyFetching(variables).then(apiErrorHandling),
     });

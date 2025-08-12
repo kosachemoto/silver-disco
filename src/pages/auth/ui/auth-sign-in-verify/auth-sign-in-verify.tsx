@@ -1,6 +1,11 @@
 import { useLocation, useRouter } from '@tanstack/react-router';
 import React from 'react';
 
+import {
+    useAuthResendCodeButton,
+    useAuthVerifyCodeButton,
+} from '@/pages/auth/hooks';
+
 import { AuthSignInVerifyForm } from '@/widgets/auth/ui/auth-sign-in-verification-form';
 
 import { EmailLink } from '@/features/email/ui';
@@ -20,8 +25,16 @@ export const AuthSignInVerify: React.FC = () => {
     const location = useLocation();
     const { email, from } = location.state;
     const { queue, unshift } = useAlertManager();
-    const mutationVerify = useAuthSignInCodeVerifyMutation();
-    const mutationResend = useAuthSignInCodeResendMutation();
+    const { props: propsVerifyCodeButton, ...optionsVerifyCodeButton } =
+        useAuthVerifyCodeButton();
+    const { props: propsResendCodeButton, ...optionsResendCodeButton } =
+        useAuthResendCodeButton();
+    const mutationVerify = useAuthSignInCodeVerifyMutation(
+        optionsVerifyCodeButton
+    );
+    const mutationResend = useAuthSignInCodeResendMutation(
+        optionsResendCodeButton
+    );
 
     if (!email) {
         return (
@@ -60,6 +73,7 @@ export const AuthSignInVerify: React.FC = () => {
             <p>Enter the code sent to your email</p>
             <AuthSignInVerifyForm
                 onSubmit={authCodeVerify}
+                propsButton={propsVerifyCodeButton}
                 isLoading={mutationVerify.isPending}
             />
             <Button
@@ -67,9 +81,8 @@ export const AuthSignInVerify: React.FC = () => {
                 variant="secondary"
                 onClick={authCodeResend}
                 isLoading={mutationResend.isPending}
-            >
-                Send again
-            </Button>
+                {...propsResendCodeButton}
+            />
         </>
     );
 };

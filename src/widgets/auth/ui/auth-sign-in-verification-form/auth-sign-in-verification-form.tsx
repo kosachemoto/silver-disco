@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import type { SubmitHandler } from 'react-hook-form';
 
 import { Button } from '@/shared/ui/button';
+import type { TProps as TPropsButton } from '@/shared/ui/button';
 import { Field } from '@/shared/ui/field';
 import { Input } from '@/shared/ui/input';
 
@@ -14,12 +15,14 @@ import { authSignInCodeVerifySchema } from '@/entities/auth/utils';
 type TProps = {
     onSubmit?: SubmitHandler<TAuthSignInCodeVerify>;
     onError?: SubmitHandler<TAuthSignInCodeVerify>;
+    propsButton?: TPropsButton;
     isLoading?: boolean;
 };
 
 export const AuthSignInVerifyForm: React.FC<TProps> = ({
     onSubmit = noop,
     onError = noop,
+    propsButton,
     isLoading,
 }) => {
     const { register, formState, handleSubmit } = useForm({
@@ -33,9 +36,12 @@ export const AuthSignInVerifyForm: React.FC<TProps> = ({
                 input={<Input {...register('code')} autoFocus />}
                 error={formState.errors.code?.message}
             />
-            <Button type="submit" isLoading={isLoading} disabled={isLoading}>
-                Sign In
-            </Button>
+            <Button
+                type="submit"
+                isLoading={isLoading}
+                disabled={isLoading}
+                {...propsButton}
+            />
         </form>
     );
 };
