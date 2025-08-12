@@ -25,9 +25,7 @@ export const AuthSignUpPasskeyForm: React.FC<TProps> = ({
     onSubmit = noop,
     onError = noop,
     defaultValues,
-    propsButton = {
-        children: 'Continue with Passkey',
-    },
+    propsButton,
     isLoading,
 }) => {
     const { register, formState, handleSubmit } = useForm<TAuthSignUpPasskey>({
