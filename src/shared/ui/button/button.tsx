@@ -26,7 +26,7 @@ export const Button: React.FC<React.PropsWithChildren<TProps>> = ({
                 props.className
             )}
         >
-            {isLoading && <Loader className={styles.loader} fill="orange" />}
+            {isLoading && <Loader className={styles.loader} />}
             {children}
         </button>
     );
