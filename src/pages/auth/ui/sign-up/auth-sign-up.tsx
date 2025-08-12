@@ -1,16 +1,21 @@
 import { useLocation, useRouter } from '@tanstack/react-router';
 import React from 'react';
 
+import { useAuthSignInPasskeyButton } from '@/pages/auth/hooks';
+
 import { AuthSignUpForm } from '@/widgets/auth/ui/auth-sign-up-form';
 
 import { useAuthSignInCodeRequestMutation } from '@/shared/api/auth/sign-in/code/request/hooks';
+import { useAuthSignInPasskeyMutation } from '@/shared/api/auth/sign-in/passkey/hooks';
 import { useAlertManager } from '@/shared/hooks/alert';
 import { Alert } from '@/shared/ui/alert';
+import { Button } from '@/shared/ui/button';
 import { Divider } from '@/shared/ui/divider';
 import { Link } from '@/shared/ui/link';
 import { List } from '@/shared/ui/list';
 import { convertApiErrorToProps } from '@/shared/utils/alert';
 
+import type { ApiError } from '@/entities/api-error/utils';
 import type { TAuthSignUp } from '@/entities/auth/types';
 
 export const AuthSignUp: React.FC = () => {
@@ -18,6 +23,12 @@ export const AuthSignUp: React.FC = () => {
     const location = useLocation();
     const { email } = location.state;
     const { queue, unshift } = useAlertManager();
+    const unshiftApiErorr = (error: ApiError) => {
+        unshift(convertApiErrorToProps(error));
+    };
+
+    const { props: propsButtonPasskey, ...optionsButtonPasskey } =
+        useAuthSignInPasskeyButton();
     const authCodeRequestMutation = useAuthSignInCodeRequestMutation();
     const authCodeRequest = (data: TAuthSignUp) => {
         authCodeRequestMutation.mutate(data, {
@@ -34,6 +45,14 @@ export const AuthSignUp: React.FC = () => {
         });
     };
 
+    const authPasskeyMutation =
+        useAuthSignInPasskeyMutation(optionsButtonPasskey);
+    const authPasskey = () =>
+        authPasskeyMutation.mutate(undefined, {
+            onSuccess: () => router.navigate({ to: '/auth/success' }),
+            onError: unshiftApiErorr,
+        });
+
     return (
         <>
             <h1>Sign Up</h1>
@@ -49,6 +68,11 @@ export const AuthSignUp: React.FC = () => {
                 </List.Item>
             </List>
             <Divider>already have an account?</Divider>
+            <Button
+                variant="secondary"
+                onClick={authPasskey}
+                {...propsButtonPasskey}
+            />
             <List>
                 <List.Item>
                     <Link to="/auth/sign-in">Sign In with Email</Link>
