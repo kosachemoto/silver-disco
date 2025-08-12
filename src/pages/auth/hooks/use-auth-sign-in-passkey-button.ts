@@ -4,7 +4,7 @@ import type { TProps } from '@/shared/ui/button';
 export const useAuthSignInPasskeyButton = (defaultProps?: TProps) => {
     return useButtonAsync(
         {
-            children: 'Continue with Passkey',
+            children: 'Sign In with Passkey',
             ...defaultProps,
         },
         {
@@ -15,10 +15,10 @@ export const useAuthSignInPasskeyButton = (defaultProps?: TProps) => {
                 children: 'Verifying...',
             },
             resolved: {
-                children: 'Retry with Passkey',
+                children: 'Success',
             },
             rejected: {
-                children: 'Success',
+                children: 'Try again with Passkey',
             },
         }
     );
