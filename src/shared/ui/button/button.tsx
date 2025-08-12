@@ -5,7 +5,7 @@ import { ReactComponent as Loader } from '@/assets/svg/loader.svg';
 
 import styles from './button.module.css';
 
-type TProps = {
+export type TProps = {
     variant?: 'primary' | 'secondary';
     isLoading?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;

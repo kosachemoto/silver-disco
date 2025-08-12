@@ -2,7 +2,7 @@ import { useLocation, useRouter } from '@tanstack/react-router';
 import { Outlet } from '@tanstack/react-router';
 import React from 'react';
 
-import { useAuthPasskeyButton } from '@/pages/auth/hooks';
+import { useAuthSignInPasskeyButton } from '@/pages/auth/hooks';
 
 import { AuthSignInForm } from '@/widgets/auth/ui/auth-sign-in-form';
 
@@ -25,13 +25,19 @@ export const AuthSignIn: React.FC = () => {
     const { email } = location.state;
     const {
         props: propsButton,
-        onStart,
+        onPending,
+        onVerifying,
         onSuccess,
         onError,
-    } = useAuthPasskeyButton();
+    } = useAuthSignInPasskeyButton();
     const { queue, unshift } = useAlertManager({ variant: 'error' });
     const authCodeRequestMutation = useAuthSignInCodeRequestMutation();
-    const authPasskeyMutation = useAuthSignInPasskeyMutation();
+    const authPasskeyMutation = useAuthSignInPasskeyMutation({
+        onPending,
+        onVerifying,
+        onSuccess,
+        onError,
+    });
     const unshiftApiErorr = (error: ApiError) => {
         unshift(convertApiErrorToProps(error));
     };
@@ -48,19 +54,11 @@ export const AuthSignIn: React.FC = () => {
         });
     };
 
-    const authPasskey = () => {
-        onStart();
+    const authPasskey = () =>
         authPasskeyMutation.mutate(undefined, {
-            onSuccess: () => {
-                onSuccess();
-                router.navigate({ to: '/auth/success' });
-            },
-            onError: (err) => {
-                onError();
-                unshiftApiErorr(err);
-            },
+            onSuccess: () => router.navigate({ to: '/auth/success' }),
+            onError: unshiftApiErorr,
         });
-    };
 
     return (
         <>

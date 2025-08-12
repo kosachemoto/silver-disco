@@ -1,1 +1,1 @@
-export { useAuthPasskeyButton } from './use-auth-passkey-button';
+export { useAuthSignInPasskeyButton } from './use-auth-sign-in-passkey-button';
