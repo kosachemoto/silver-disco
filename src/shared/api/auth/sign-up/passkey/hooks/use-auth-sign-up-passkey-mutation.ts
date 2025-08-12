@@ -8,6 +8,7 @@ import { authSignUpPasskeyVerifyFetching } from '@/shared/api/auth/sign-up/passk
 import { apiErrorHandling } from '@/entities/api-error/utils';
 import type { ApiError } from '@/entities/api-error/utils';
 import type { TAuthSignUpPasskey } from '@/entities/auth/types';
+import { webAuthnErrorHandler } from '@/entities/web-authn/utils';
 
 type TOptions = {
     onPending?: () => void;
@@ -30,6 +31,7 @@ export const useAuthSignUpPasskeyMutation = ({
             authSignUpPasskeyRequestFetching(variables)
                 .then(apiErrorHandling)
                 .then(create)
+                .catch(webAuthnErrorHandler)
                 .then((data) => {
                     onVerifying();
                     return data;

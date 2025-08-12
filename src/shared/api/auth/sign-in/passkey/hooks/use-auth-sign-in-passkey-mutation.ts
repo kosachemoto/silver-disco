@@ -6,6 +6,7 @@ import { authSignInPasskeyRequestFetching } from '@/shared/api/auth/sign-in/pass
 import { authSignInPasskeyVerifyFetching } from '@/shared/api/auth/sign-in/passkey/verify/utils';
 
 import { apiErrorHandling } from '@/entities/api-error/utils';
+import { webAuthnErrorHandler } from '@/entities/web-authn/utils';
 
 type TOptions = {
     onPending?: () => void;
@@ -28,6 +29,7 @@ export const useAuthSignInPasskeyMutation = ({
             authSignInPasskeyRequestFetching()
                 .then(apiErrorHandling)
                 .then(get)
+                .catch(webAuthnErrorHandler)
                 .then((data) => {
                     onVerifying();
                     return data;
