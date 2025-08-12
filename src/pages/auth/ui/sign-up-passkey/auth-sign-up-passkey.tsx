@@ -1,7 +1,7 @@
 import { useLocation, useRouter } from '@tanstack/react-router';
 import React from 'react';
 
-import { useAuthPasskeyButton } from '@/pages/auth/hooks';
+import { useAuthSignUpPasskeyButton } from '@/pages/auth/hooks';
 
 import { AuthSignUpPasskeyForm } from '@/widgets/auth/ui/auth-sign-up-passkey-form';
 
@@ -19,23 +19,24 @@ export const AuthSignUpPasskey: React.FC = () => {
     const router = useRouter();
     const {
         props: propsButton,
-        onStart,
+        onPending,
+        onVerifying,
         onSuccess,
         onError,
-    } = useAuthPasskeyButton();
+    } = useAuthSignUpPasskeyButton();
     const location = useLocation();
     const { email } = location.state;
     const { queue, unshift } = useAlertManager();
-    const authSignUpPasskeyMutation = useAuthSignUpPasskeyMutation();
+    const authSignUpPasskeyMutation = useAuthSignUpPasskeyMutation({
+        onPending,
+        onVerifying,
+        onSuccess,
+        onError,
+    });
     const signUpPasskey = (data: TAuthSignUpPasskey) => {
-        onStart();
         authSignUpPasskeyMutation.mutate(data, {
-            onSuccess: () => {
-                onSuccess();
-                router.navigate({ to: '/auth/success' });
-            },
+            onSuccess: () => router.navigate({ to: '/auth/success' }),
             onError: (error) => {
-                onError();
                 unshift(convertApiErrorToProps(error));
             },
         });
