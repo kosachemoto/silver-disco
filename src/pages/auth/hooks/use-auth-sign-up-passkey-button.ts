@@ -14,11 +14,11 @@ export const useAuthSignUpPasskeyButton = (defaultProps?: TProps) =>
             verifying: {
                 children: 'Verifying...',
             },
-            rejected: {
-                children: 'Retry wiht Passkey',
-            },
             resolved: {
                 children: 'Success',
+            },
+            rejected: {
+                children: 'Retry wiht Passkey',
             },
         }
     );

@@ -11,11 +11,11 @@ export const useAuthResendCodeButton = (defaultProps?: TProps) =>
             pending: {
                 children: 'Sending...',
             },
-            rejected: {
-                children: 'Retry sending',
-            },
             resolved: {
                 children: 'Send again',
+            },
+            rejected: {
+                children: 'Retry sending',
             },
         }
     );

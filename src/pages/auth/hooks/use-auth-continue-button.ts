@@ -11,11 +11,11 @@ export const useAuthContinueButton = (defaultProps?: TProps) =>
             pending: {
                 children: 'Pending...',
             },
-            rejected: {
-                children: 'Retry',
-            },
             resolved: {
                 children: 'Success',
+            },
+            rejected: {
+                children: 'Retry',
             },
         }
     );
