@@ -60,6 +60,9 @@ export const AuthSignUpPasskey: React.FC = () => {
                 <List.Item>
                     <Link to="/auth/sign-up">Sing Up with email</Link>
                 </List.Item>
+                <List.Item>
+                    <Link to="/auth/sign-up">Or Password</Link>
+                </List.Item>
             </List>
             <Divider>already have an account?</Divider>
             <Button

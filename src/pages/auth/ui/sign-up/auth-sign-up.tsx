@@ -67,7 +67,12 @@ export const AuthSignUp: React.FC = () => {
             />
             <List>
                 <List.Item>
-                    <Link to="/auth/sign-up/passkey">Sing Up with passkey</Link>
+                    <Link to="/auth/sign-up/password">
+                        Sing Up with password
+                    </Link>
+                </List.Item>
+                <List.Item>
+                    <Link to="/auth/sign-up/passkey">Or Passkey</Link>
                 </List.Item>
             </List>
             <Divider>already have an account?</Divider>
