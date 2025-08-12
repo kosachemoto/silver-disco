@@ -1,6 +1,6 @@
 import get from 'lodash/get';
 
-import { convertArrayBufferToBase64 } from '@/shared/utils';
+import { convertArrayBufferToBase64, delaying } from '@/shared/utils';
 
 import type { TFetchMockConfig } from '@/entities/fetch/mock/types';
 
@@ -87,6 +87,19 @@ export const fetchMockConfig: TFetchMockConfig = {
                         },
                     }),
                     { status: 401 }
+                );
+            }
+
+            if (code === 'timeout') {
+                await delaying(3000);
+                return new Response(
+                    JSON.stringify({
+                        error: {
+                            id: 'auth.code.verify.timeout',
+                            message: 'Request timed out. Please try again',
+                        },
+                    }),
+                    { status: 408 }
                 );
             }
 
