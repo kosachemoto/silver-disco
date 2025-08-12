@@ -1,1 +1,1 @@
-export { AuthSignInVerify } from './auth-sign-in-verify';
+export { AuthVerification } from './auth-verification';

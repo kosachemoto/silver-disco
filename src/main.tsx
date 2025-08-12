@@ -15,7 +15,7 @@ import { createRoot } from 'react-dom/client';
 import { AuthLayout } from '@/pages/auth/ui/auth-layout';
 import { AuthSignIn } from '@/pages/auth/ui/auth-sign-in';
 import { AuthSignInPassword } from '@/pages/auth/ui/auth-sign-in-password';
-import { AuthSignInVerify } from '@/pages/auth/ui/auth-sign-in-verify';
+import { AuthVerification } from '@/pages/auth/ui/auth-sign-in-verify';
 import { AuthSuccess } from '@/pages/auth/ui/auth-success';
 import { AuthSignUp } from '@/pages/auth/ui/sign-up';
 import { AuthSignUpPasskey } from '@/pages/auth/ui/sign-up-passkey';
@@ -53,7 +53,7 @@ const signInRoute = createRoute({
 const signInVerificationRoute = createRoute({
     getParentRoute: () => authRoute,
     path: '/sign-in/verification',
-    component: AuthSignInVerify,
+    component: AuthVerification,
 });
 
 const signInPasswordRoute = createRoute({
@@ -71,7 +71,7 @@ const signUpRoute = createRoute({
 const signUpVerificationRoute = createRoute({
     getParentRoute: () => authRoute,
     path: '/sign-up/verification',
-    component: AuthSignInVerify,
+    component: AuthVerification,
 });
 
 const signUpPasskeyRoute = createRoute({

@@ -8,7 +8,7 @@ import {
 
 import { AuthSignUpForm } from '@/widgets/auth/ui/auth-sign-up-form';
 
-import { useAuthSignInCodeRequestMutation } from '@/shared/api/auth/sign-in/code/request/hooks';
+import { useAuthCodeRequestMutation } from '@/shared/api/auth/code/request/hooks';
 import { useAuthSignInPasskeyMutation } from '@/shared/api/auth/sign-in/passkey/hooks';
 import { useAlertManager } from '@/shared/hooks/alert';
 import { Alert } from '@/shared/ui/alert';
@@ -29,7 +29,7 @@ export const AuthSignUp: React.FC = () => {
         useAuthContinueButton();
     const { props: propsButtonPasskey, ...optionsButtonPasskey } =
         useAuthSignInPasskeyButton();
-    const authCodeRequestMutation = useAuthSignInCodeRequestMutation(
+    const authCodeRequestMutation = useAuthCodeRequestMutation(
         optionsButtonContinue
     );
     const authCodeRequest = (data: TAuthSignUp) => {

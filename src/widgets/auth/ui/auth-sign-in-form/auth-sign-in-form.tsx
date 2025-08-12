@@ -10,13 +10,13 @@ import { Button } from '@/shared/ui/button';
 import type { TProps as TPropsButton } from '@/shared/ui/button';
 import { Checkbox } from '@/shared/ui/checkbox';
 
-import type { TAuthSignInCodeRequest } from '@/entities/auth/types';
-import { authSignInCodeRequestSchema } from '@/entities/auth/utils';
+import type { TAuthCodeRequest } from '@/entities/auth/types';
+import { authCodeRequestSchema } from '@/entities/auth/utils';
 
 type TProps = {
-    onSubmit?: SubmitHandler<TAuthSignInCodeRequest>;
-    onError?: SubmitHandler<TAuthSignInCodeRequest>;
-    defaultValues?: DefaultValues<TAuthSignInCodeRequest>;
+    onSubmit?: SubmitHandler<TAuthCodeRequest>;
+    onError?: SubmitHandler<TAuthCodeRequest>;
+    defaultValues?: DefaultValues<TAuthCodeRequest>;
     propsButton?: TPropsButton;
     isLoading?: boolean;
 };
@@ -28,11 +28,10 @@ export const AuthSignInForm: React.FC<TProps> = ({
     propsButton,
     isLoading,
 }) => {
-    const { register, formState, handleSubmit } =
-        useForm<TAuthSignInCodeRequest>({
-            resolver: zodResolver(authSignInCodeRequestSchema),
-            defaultValues,
-        });
+    const { register, formState, handleSubmit } = useForm<TAuthCodeRequest>({
+        resolver: zodResolver(authCodeRequestSchema),
+        defaultValues,
+    });
 
     return (
         <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>

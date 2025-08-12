@@ -9,7 +9,7 @@ import {
 
 import { AuthSignInForm } from '@/widgets/auth/ui/auth-sign-in-form';
 
-import { useAuthSignInCodeRequestMutation } from '@/shared/api/auth/sign-in/code/request/hooks';
+import { useAuthCodeRequestMutation } from '@/shared/api/auth/code/request/hooks';
 import { useAuthSignInPasskeyMutation } from '@/shared/api/auth/sign-in/passkey/hooks';
 import { useAlertManager } from '@/shared/hooks/alert';
 import { Alert } from '@/shared/ui/alert';
@@ -18,7 +18,7 @@ import { Divider } from '@/shared/ui/divider';
 import { Link } from '@/shared/ui/link';
 import { List } from '@/shared/ui/list';
 
-import type { TAuthSignInCodeRequest } from '@/entities/auth/types';
+import type { TAuthCodeRequest } from '@/entities/auth/types';
 
 export const AuthSignIn: React.FC = () => {
     const router = useRouter();
@@ -29,13 +29,13 @@ export const AuthSignIn: React.FC = () => {
     const { props: propsButtonPasskey, ...optionsButtonPasskey } =
         useAuthSignInPasskeyButton();
     const { queue, unshiftApiErorr } = useAlertManager({ variant: 'error' });
-    const authCodeRequestMutation = useAuthSignInCodeRequestMutation(
+    const authCodeRequestMutation = useAuthCodeRequestMutation(
         optionsButtonContinue
     );
     const authPasskeyMutation =
         useAuthSignInPasskeyMutation(optionsButtonPasskey);
 
-    const authCodeRequest = (data: TAuthSignInCodeRequest) => {
+    const authCodeRequest = (data: TAuthCodeRequest) => {
         authCodeRequestMutation.mutate(data, {
             onSuccess: () => {
                 router.navigate({
