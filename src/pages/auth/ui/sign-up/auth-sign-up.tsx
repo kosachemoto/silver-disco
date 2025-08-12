@@ -16,19 +16,14 @@ import { Button } from '@/shared/ui/button';
 import { Divider } from '@/shared/ui/divider';
 import { Link } from '@/shared/ui/link';
 import { List } from '@/shared/ui/list';
-import { convertApiErrorToProps } from '@/shared/utils/alert';
 
-import type { ApiError } from '@/entities/api-error/utils';
 import type { TAuthSignUp } from '@/entities/auth/types';
 
 export const AuthSignUp: React.FC = () => {
     const router = useRouter();
     const location = useLocation();
     const { email } = location.state;
-    const { queue, unshift } = useAlertManager();
-    const unshiftApiErorr = (error: ApiError) => {
-        unshift(convertApiErrorToProps(error));
-    };
+    const { queue, unshiftApiErorr } = useAlertManager();
 
     const { props: propsButtonContinue, ...optionsButtonContinue } =
         useAuthContinueButton();
@@ -48,7 +43,7 @@ export const AuthSignUp: React.FC = () => {
                     },
                 });
             },
-            onError: (error) => unshift(convertApiErrorToProps(error)),
+            onError: unshiftApiErorr,
         });
     };
 

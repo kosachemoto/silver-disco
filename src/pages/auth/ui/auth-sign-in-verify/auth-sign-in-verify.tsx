@@ -16,7 +16,6 @@ import { useAlertManager } from '@/shared/hooks/alert';
 import { Alert } from '@/shared/ui/alert';
 import { Button } from '@/shared/ui/button';
 import { Link } from '@/shared/ui/link';
-import { convertApiErrorToProps } from '@/shared/utils/alert';
 
 import type { TAuthSignInCodeVerify } from '@/entities/auth/types';
 
@@ -24,7 +23,7 @@ export const AuthSignInVerify: React.FC = () => {
     const router = useRouter();
     const location = useLocation();
     const { email, from } = location.state;
-    const { queue, unshift } = useAlertManager();
+    const { queue, unshiftApiErorr } = useAlertManager();
     const { props: propsVerifyCodeButton, ...optionsVerifyCodeButton } =
         useAuthVerifyCodeButton();
     const { props: propsResendCodeButton, ...optionsResendCodeButton } =
@@ -51,9 +50,7 @@ export const AuthSignInVerify: React.FC = () => {
             onSuccess: () => {
                 router.navigate({ to: '/auth/success' });
             },
-            onError: (error) => {
-                unshift(convertApiErrorToProps(error));
-            },
+            onError: unshiftApiErorr,
         });
     };
 

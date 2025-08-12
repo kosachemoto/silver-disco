@@ -17,9 +17,7 @@ import { Button } from '@/shared/ui/button';
 import { Divider } from '@/shared/ui/divider';
 import { Link } from '@/shared/ui/link';
 import { List } from '@/shared/ui/list';
-import { convertApiErrorToProps } from '@/shared/utils/alert';
 
-import type { ApiError } from '@/entities/api-error/utils';
 import type { TAuthSignInPassword } from '@/entities/auth/types';
 
 export const AuthSignInPassword: React.FC = () => {
@@ -28,16 +26,13 @@ export const AuthSignInPassword: React.FC = () => {
         useAuthContinueButton();
     const { props: propsButton, ...optionsSignInPasskeyButton } =
         useAuthSignInPasskeyButton();
-    const { queue, unshift } = useAlertManager({ variant: 'error' });
+    const { queue, unshiftApiErorr } = useAlertManager({ variant: 'error' });
     const authLoginMutation = useAuthPasswordVerifyMutation(
         optionsContinueButton
     );
     const authPasskeyMutation = useAuthSignInPasskeyMutation(
         optionsSignInPasskeyButton
     );
-    const unshiftApiErorr = (error: ApiError) => {
-        unshift(convertApiErrorToProps(error));
-    };
 
     const authPasskey = () =>
         authPasskeyMutation.mutate(undefined, {

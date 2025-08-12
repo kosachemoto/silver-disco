@@ -16,9 +16,7 @@ import { Button } from '@/shared/ui/button';
 import { Divider } from '@/shared/ui/divider';
 import { Link } from '@/shared/ui/link';
 import { List } from '@/shared/ui/list';
-import { convertApiErrorToProps } from '@/shared/utils/alert';
 
-import type { ApiError } from '@/entities/api-error/utils';
 import type { TAuthSignUpPasskey } from '@/entities/auth/types';
 
 export const AuthSignUpPasskey: React.FC = () => {
@@ -29,10 +27,7 @@ export const AuthSignUpPasskey: React.FC = () => {
         useAuthSignInPasskeyButton();
     const location = useLocation();
     const { email } = location.state;
-    const { queue, unshift } = useAlertManager();
-    const unshiftApiErorr = (error: ApiError) => {
-        unshift(convertApiErrorToProps(error));
-    };
+    const { queue, unshiftApiErorr } = useAlertManager();
 
     const authSignUpPasskeyMutation =
         useAuthSignUpPasskeyMutation(optionsSignUpButton);

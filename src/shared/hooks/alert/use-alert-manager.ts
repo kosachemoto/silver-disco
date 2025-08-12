@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { Alert } from '@/shared/ui/alert';
+import { convertApiErrorToProps } from '@/shared/utils/alert';
 
+import type { ApiError } from '@/entities/api-error/utils';
 import type { TPropsWithKey } from '@/entities/react/types';
 
 type TProps = React.ComponentProps<typeof Alert>;
@@ -29,8 +31,16 @@ export const useAlertManager = (
         [defaultProps, limit]
     );
 
+    const unshiftApiErorr = React.useCallback(
+        (error: ApiError) => {
+            unshift(convertApiErrorToProps(error));
+        },
+        [unshift]
+    );
+
     return {
         queue,
         unshift,
+        unshiftApiErorr,
     };
 };

@@ -17,9 +17,7 @@ import { Button } from '@/shared/ui/button';
 import { Divider } from '@/shared/ui/divider';
 import { Link } from '@/shared/ui/link';
 import { List } from '@/shared/ui/list';
-import { convertApiErrorToProps } from '@/shared/utils/alert';
 
-import type { ApiError } from '@/entities/api-error/utils';
 import type { TAuthSignInCodeRequest } from '@/entities/auth/types';
 
 export const AuthSignIn: React.FC = () => {
@@ -30,15 +28,12 @@ export const AuthSignIn: React.FC = () => {
         useAuthContinueButton();
     const { props: propsButtonPasskey, ...optionsButtonPasskey } =
         useAuthSignInPasskeyButton();
-    const { queue, unshift } = useAlertManager({ variant: 'error' });
+    const { queue, unshiftApiErorr } = useAlertManager({ variant: 'error' });
     const authCodeRequestMutation = useAuthSignInCodeRequestMutation(
         optionsButtonContinue
     );
     const authPasskeyMutation =
         useAuthSignInPasskeyMutation(optionsButtonPasskey);
-    const unshiftApiErorr = (error: ApiError) => {
-        unshift(convertApiErrorToProps(error));
-    };
 
     const authCodeRequest = (data: TAuthSignInCodeRequest) => {
         authCodeRequestMutation.mutate(data, {
